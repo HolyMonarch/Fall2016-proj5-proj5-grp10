@@ -1,5 +1,6 @@
 library(ggplot2)
 library(plotly)
+library(dplyr)
 source('../lib/simplify_breeds.R')
 
 # get shelter data and keep dogs only
@@ -53,17 +54,15 @@ colnames(plot_freqs) = c('breed', 'val')
 color_overrep = colorRampPalette(c("red", "black")) (sum(plot_freqs$val>1)) 
 color_underrep = colorRampPalette(c("black", "green")) (sum(plot_freqs$val<=1)) 
 
-plot_ly(plot_freqs,
-        x = breed,
-        y = log(val),
+plot_ly(x = plot_freqs$breed,
+        y = log(plot_freqs$val),
         type = 'bar', 
-        text = breed, 
+        text = plot_freqs$breed, 
         hoverinfo = 'text', 
         marker = list(color = c(color_overrep, color_underrep))) %>%
-  
   layout(title = "Over-represented Dog Breeds in Shelter",
-         xaxis = list(title = ""),
-         yaxis = list(title = "<- Less than expected   |   More than expected ->"))
+         xaxis = list(title = "", tickangle = 45, position=.15, domain=c(0,.9)),
+         yaxis = list(title = "<- Less than expected   |   More than expected ->", domain=c(.13,1)))
 
 
 
