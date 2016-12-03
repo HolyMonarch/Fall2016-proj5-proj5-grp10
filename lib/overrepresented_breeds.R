@@ -1,18 +1,14 @@
+library(ggplot2)
+library(plotly)
+source('../lib/simplify_breeds.R')
 
-# D = data.table::fread('../data/shelter_data.csv')
-# D = D[D$AnimalType=='Dog',]
-# D$AnimalType = NULL
-# 
-# # replace 2-breed dogs with majoritary breed + "Mix"
-# repl = function(x){ifelse(grepl('/',x), paste(strsplit(x, '/')[[1]][1], 'Mix'), x)}
-# D$Breed = sapply(D$Breed, repl)
-# write.csv(D ,"../output/shelter_dogs.csv", row.names=FALSE)
-
-D = data.table::fread('../output/shelter_dogs.csv')
+# get shelter data and keep dogs only
+D = read.csv('../data/shelter_data.csv')
+D = D[D$AnimalType=='Dog',]
 D$Breed = tolower(D$Breed)
 
 # get baseline frequencies of breeds in U.S.
-breeds = data.table::fread('../data/breed_count.csv')
+breeds = read.csv('../data/breed_count.csv')
 breed_count = as.integer(gsub(',', '', breeds$count))
 breeds_names = gsub('\\(', '', breeds$breed)
 breeds_names = gsub('\\)', '', breeds_names)
@@ -21,49 +17,15 @@ breeds_names = tolower(breeds_names)
 names(breed_count) = breeds_names
 breed_count = breed_count[breed_count>0]
 
+# simplify breeds
+D$Breed = simplify_breeds(D$Breed)
+names(breed_count) = simplify_breeds(names(breed_count))
 
-# define pit bull
-pit_bull_types = c('pit bull', 
-                   'staffordshire bull terrier',
-                   'american pit bull terrier',
-                   'american bulldog',
-                   'american staffordshire terrier',
-                   'staffordshire')
-D$Breed = gsub(paste(pit_bull_types, collapse='|'), 'pit bull', D$Breed)
-names(breed_count) = gsub(paste(pit_bull_types, collapse='|'), 'pit bull', names(breed_count))
-# D$Breed[D$Breed %in% pit_bull_types] = 'pit bull'
-# names(breed_count)[names(breed_count) %in% pit_bull_types] = 'pit bull'
-
-# define chihuahua
-chihuahua_types = c('chihuahua shorthair', 
-                    'chihuahua longhair',
-                    'chihuahua long coat',
-                    'chihuahua smooth coat')
-D$Breed = gsub(paste(chihuahua_types, collapse='|'), 'chihuahua', D$Breed)
-names(breed_count) = gsub(paste(chihuahua_types, collapse='|'), 'chihuahua', names(breed_count))
-
-# define dachshund
-dachshund_types = c('dachshund', 
-                    'dachshund longhair',
-                    'dachshund wirehair',
-                    'dachshund smooth haired',
-                    'dachshund long haired',
-                    'dachshund wire haired',
-                    'dachshund miniature smooth haired',
-                    'dachshund miniature long haired',
-                    'dachshund miniature wire haired')
-D$Breed = gsub(paste(dachshund_types, collapse='|'), 'dachshund', D$Breed)
-names(breed_count) = gsub(paste(dachshund_types, collapse='|'), 'dachshund', names(breed_count))
-
-# replace english bulldog with bulldog
-D$Breed = gsub('english bulldog', 'bulldog', D$Breed)
-
-# recount breeds
+# recount breeds after simplification
 breed_count = tapply(breed_count, names(breed_count), sum)
 
-
-# focus on pure breeds most common in shelter (n>8)
-sh_breeds = table(D$Breed[!grepl('mix', D$Breed)])
+# focus on pure breeds most common in shelter (n>9)
+sh_breeds = table(D$Breed[!grepl('mix|/', D$Breed)])
 sh_breeds = sh_breeds[sh_breeds>9]
 
 
@@ -83,22 +45,25 @@ names(breed_count)[names(breed_count)=='parson russell terrier'] = 'jack russell
 sh_breeds_freq = sh_breeds/sum(sh_breeds)
 breeds_freq = breed_count[names(sh_breeds)]/sum(breed_count[names(sh_breeds)])
 rel_freqs = sort(sh_breeds_freq/breeds_freq, decreasing=T)
-barplot(log(rel_freqs))
 
-
-# plot
+# plot:
 plot_freqs = as.data.frame(rel_freqs)
 colnames(plot_freqs) = c('breed', 'val')
-a = ggplot(plot_freqs, aes(x=1:length(val), y=log(val), fill=log(val))) 
-a = a + geom_bar(stat="identity") +
-  xlab("") + 
-  ylab("Relative frequency") + 
-  scale_colour_gradientn(colours=rainbow(3)) + 
-  theme_bw()
 
+color_overrep = colorRampPalette(c("red", "black")) (sum(plot_freqs$val>1)) 
+color_underrep = colorRampPalette(c("black", "green")) (sum(plot_freqs$val<=1)) 
 
+plot_ly(plot_freqs,
+        x = breed,
+        y = log(val),
+        type = 'bar', 
+        text = breed, 
+        hoverinfo = 'text', 
+        marker = list(color = c(color_overrep, color_underrep))) %>%
+  
+  layout(title = "Over-represented Dog Breeds in Shelter",
+         xaxis = list(title = ""),
+         yaxis = list(title = "<- Less than expected   |   More than expected ->"))
 
-# names(breed_count)[grepl('aus', names(breed_count))]
-# names(sh_breeds)[grepl('australian', names(sh_breeds))]
 
 
