@@ -1,0 +1,127 @@
+---
+title: "Shelter Dogs"
+output: html_document
+---
+
+\
+\
+
+```{r setup, include=FALSE}
+
+library(ggplot2)
+library(plotly)
+library(dplyr)
+source('../lib/simplify_breeds.R')
+
+
+```
+
+#### Frequency of breeds in shelter relative to their baseline frequency
+\
+
+Here we compare the frequency of each pure breed in the shelter relative to its baseline frequency in American homes. Positive values (red colors) indicate over-represented breeds in the shelter. These are, presumably, breeds more likely to be abandoned. Negative values (green) indicate the opposite.
+\
+
+
+```{r analysis1, warning=FALSE, message=FALSE, echo=FALSE}
+
+# get shelter data and keep dogs only
+D = read.csv('../data/shelter_data.csv')
+D = D[D$AnimalType=='Dog',]
+D$Breed = tolower(D$Breed)
+
+# get baseline frequencies of breeds in U.S.
+breeds = read.csv('../data/breed_count.csv')
+breed_count = as.integer(gsub(',', '', breeds$count))
+breeds_names = gsub('\\(', '', breeds$breed)
+breeds_names = gsub('\\)', '', breeds_names)
+breeds_names = gsub(' Imp', '', breeds_names)
+breeds_names = tolower(breeds_names)
+names(breed_count) = breeds_names
+breed_count = breed_count[breed_count>0]
+
+# simplify breeds
+D$Breed = simplify_breeds(D$Breed)
+names(breed_count) = simplify_breeds(names(breed_count))
+
+# recount breeds after simplification
+breed_count = tapply(breed_count, names(breed_count), sum)
+
+# focus on pure breeds most common in shelter (n>9)
+sh_breeds = table(D$Breed[!grepl('mix|/', D$Breed)])
+sh_breeds = sh_breeds[sh_breeds>9]
+
+
+# resolve conflicts between breed lists:
+sh_breeds = sh_breeds[!names(sh_breeds)=='rat terrier']
+sh_breeds = sh_breeds[!names(sh_breeds)=='anatol shepherd']
+names(breed_count)[names(breed_count)=='retriever labrador'] = 'labrador retriever'
+names(breed_count)[names(breed_count)=='retriever golden'] = 'golden retriever'
+names(breed_count)[names(breed_count)=='german shepherd dog alsatian'] = 'german shepherd'
+names(breed_count)[names(breed_count)=='poodle miniature'] = 'miniature poodle'
+names(breed_count)[names(breed_count)=='dobermann'] = 'doberman pinsch'
+names(breed_count)[names(breed_count)=='spaniel cocker'] = 'cocker spaniel'
+names(breed_count)[names(breed_count)=='pyrenean mountain dog'] = 'great pyrenees'
+names(breed_count)[names(breed_count)=='parson russell terrier'] = 'jack russell terrier'
+
+# compute relative frequencies of main breeds in shelter vs country
+sh_breeds_freq = sh_breeds/sum(sh_breeds)
+breeds_freq = breed_count[names(sh_breeds)]/sum(breed_count[names(sh_breeds)])
+rel_freqs = sort(sh_breeds_freq/breeds_freq, decreasing=T)
+
+# plot:
+plot_freqs = as.data.frame(rel_freqs)
+colnames(plot_freqs) = c('breed', 'val')
+
+color_overrep = colorRampPalette(c("red", "black")) (sum(plot_freqs$val>1)) 
+color_underrep = colorRampPalette(c("black", "green")) (sum(plot_freqs$val<=1)) 
+
+plot_ly(x = plot_freqs$breed,
+        y = log(plot_freqs$val),
+        type = 'bar', 
+        text = plot_freqs$breed, 
+        hoverinfo = 'text', 
+        marker = list(color = c(color_overrep, color_underrep)), 
+        width = 900) %>%
+  layout(title = "Relative Frequency of Dog Breeds in Shelter",
+         xaxis = list(title = "", tickangle = 45, position=.15, domain=c(0,.9)),
+         yaxis = list(title = "<- Less than Expected   |   More than Expected ->", domain=c(.13,1)))
+```
+\
+\
+
+
+#### Predicting dog adoption
+\
+
+We now look at what characteristics make a dog more likely to be adopted. We ran a logistic regression to predict adoption outcome. Below we show, ranked by importance, the different predictors. Green indicates a positive influence of the predictor, red indicates a negative influence.   
+\
+
+```{r analysis2, warning=FALSE, message=FALSE, echo=FALSE}
+
+# load relevant output of logistic regression:
+load('../output/lrt_log_reg.RData')
+
+# plot
+importance = lrt[-1,2]/lrt[-1,1]
+names(importance) = rownames(lrt)[-1]
+importance = sort(importance, decreasing=T)
+importance = as.data.frame(as.table(importance))
+colnames(importance) = c('pred', 'val')
+
+colors = rep(rgb(0,.4,0), nrow(importance))
+colors[importance$pred %in% c('Age','IsMale')] = rgb(.6,0,0) # change colors for predictors with neg influence based on logistic reg results
+
+plot_ly(x = importance$pred,
+        y = log(importance$val),
+        type = 'bar', 
+        text = importance$pred, 
+        hoverinfo = 'text', 
+        marker = list(color = colors), 
+        height = 400) %>%
+  layout(title = "Predictors of Adoption",
+         xaxis = list(title = "", position=.1, domain=c(0,.9)),
+         yaxis = list(title = "Importance [log(deviance/df)]", domain=c(.1,1)))
+
+```
+
