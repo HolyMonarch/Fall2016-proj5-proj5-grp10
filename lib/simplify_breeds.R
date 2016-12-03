@@ -31,9 +31,5 @@ simplify_breeds = function(breed_list){
   output = gsub(paste(chihuahua_types, collapse='|'), 'chihuahua', output)
   output = gsub(paste(dachshund_types, collapse='|'), 'dachshund', output)
   
-  # output[grepl('retriever', output)] = 'retriever'
-  #   
-  # breeds = as.character(unique(reg_data$MainBreed))
-  # breeds[grepl('spaniel', breeds)]
-  
+  return(output)  
 }
