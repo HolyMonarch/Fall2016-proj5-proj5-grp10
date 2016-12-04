@@ -4,8 +4,12 @@ library(dplyr)
 source('../lib/simplify_breeds.R')
 
 # get shelter data and keep dogs only
-D = read.csv('../data/shelter_data.csv')
-D = D[D$AnimalType=='Dog',]
+# D = read.csv('../data/shelter_data.csv')
+load("../data/shelter_data_new.RData")
+D = shelter_data_new
+D = D[D$`Animal Type` =='Dog',]
+# D = D[D$`Intake Type` =='Stray',]
+# D = D[D$`Intake Type` =='Owner Surrender',]
 D$Breed = tolower(D$Breed)
 
 # get baseline frequencies of breeds in U.S.
@@ -27,7 +31,7 @@ breed_count = tapply(breed_count, names(breed_count), sum)
 
 # focus on pure breeds most common in shelter (n>9)
 sh_breeds = table(D$Breed[!grepl('mix|/', D$Breed)])
-sh_breeds = sh_breeds[sh_breeds>9]
+sh_breeds = sh_breeds[sh_breeds>14]
 
 
 # resolve conflicts between breed lists:
@@ -37,10 +41,12 @@ names(breed_count)[names(breed_count)=='retriever labrador'] = 'labrador retriev
 names(breed_count)[names(breed_count)=='retriever golden'] = 'golden retriever'
 names(breed_count)[names(breed_count)=='german shepherd dog alsatian'] = 'german shepherd'
 names(breed_count)[names(breed_count)=='poodle miniature'] = 'miniature poodle'
+names(breed_count)[names(breed_count)=='poodle toy'] = 'toy poodle'
 names(breed_count)[names(breed_count)=='dobermann'] = 'doberman pinsch'
 names(breed_count)[names(breed_count)=='spaniel cocker'] = 'cocker spaniel'
 names(breed_count)[names(breed_count)=='pyrenean mountain dog'] = 'great pyrenees'
 names(breed_count)[names(breed_count)=='parson russell terrier'] = 'jack russell terrier'
+names(breed_count)[names(breed_count)=='basset griffon vendeen petit'] = 'pbgv'
 
 # compute relative frequencies of main breeds in shelter vs country
 sh_breeds_freq = sh_breeds/sum(sh_breeds)

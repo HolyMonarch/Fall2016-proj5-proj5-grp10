@@ -4,29 +4,25 @@ load('../output/reg_ready_data.RData')
 
 # fit logistic regression:
 m = glm(OutcomeType ~ ., data = reg_data, family="binomial") 
-
-# select signif predictors:
 coef_stats = coef(summary(m))
-coef_stats = coef_stats[coef_stats[,4]<.05,]
 
-# plot
-plot_z_val = data.frame(pred=rownames(coef_stats), val=coef_stats[,3])
+
+# plot signif predictors
+sig_coefs = coef_stats[coef_stats[,4]<.05,]
+plot_z_val = data.frame(pred=rownames(sig_coefs), val=sig_coefs[,3])
 plot_z_val = arrange(plot_z_val, desc(abs(val)))
-
 plot_ly(plot_z_val,
-        x = pred,
-        y = val,
+        x = ~pred,
+        y = ~val,
         type = 'bar', 
-        text = pred, 
+        text = ~pred, 
         hoverinfo = 'text') %>%
   layout(title = "Significant predictors in Adoption outcome",
          xaxis = list(title = ""),
          yaxis = list(title = "Influence (z-value)"))
 
 
-
 # likelihood ratio test to determine importance of each predictor:
-
 # lrt = anova(object=m, test="Chisq")
 # save(lrt, file='../output/lrt_log_reg.RData')
 load('../output/lrt_log_reg.RData')
@@ -53,22 +49,14 @@ plot_ly(x = importance$pred,
          yaxis = list(title = "Importance [log(deviance/df)]", domain=c(.1,1)))
 
 
-# classifier:
-library(gbm)
-class_data = reg_data %>%
-  mutate(HasName = as.integer(HasName)) %>%
-  mutate(IsMale = as.integer(IsMale)) %>%
-  mutate(IsSpayed = as.integer(IsSpayed)) %>%
-  mutate(IsTwoBreeds = as.integer(IsTwoBreeds)) %>%
-  mutate(IsMix = as.integer(IsMix)) %>%
-  mutate(IsMulticolor = as.integer(IsMulticolor))
-  
-  
-fit = gbm(OutcomeType~. , data=class_data, distribution="bernoulli", n.trees=100, shrinkage=0.05)
 
-pred = predict(fit, newdata = X_test, missing=NA)
-
-
+# plot most infulential breeds for adoption outcome
+data_pure_breeds = reg_data %>% filter(!IsMix) %>% select(-c(IsMix, IsTwoBreeds))
+m2 = glm(OutcomeType ~ MainBreed, data = data_pure_breeds, family="binomial") 
+breed_coefs = coef(summary(m2))
+breed_coefs = breed_coefs[grepl('MainBreed', rownames(breed_coefs)),]
+rownames(breed_coefs) = gsub('MainBreed', '', rownames(breed_coefs))
+breed_coefs = breed_coefs[order(abs(breed_coefs[,3]), decreasing=T),]
 
 
 
