@@ -22,13 +22,13 @@ breeds = simplify_breeds(breeds)
 reg_data$MainBreed = as.factor(breeds)
 
 # define main color variable  
-reg_data$MainColor = as.factor(sapply(reg_data$Color, function(x){strsplit(x, '/')[[1]][1]}))
+reg_data$MainColor = as.factor(sapply(reg_data$Color, function(x){strsplit(as.character(x), '/')[[1]][1]}))
 
 # define age variable, in months
 isageyears = grepl('year', reg_data$AgeuponOutcome)
 isagemonts = grepl('month', reg_data$AgeuponOutcome)
 isageweeks = grepl('week', reg_data$AgeuponOutcome)
-age = as.numeric(sapply(reg_data$AgeuponOutcome, function(x){strsplit(x, ' ')[[1]][1]}))
+age = as.numeric(sapply(reg_data$AgeuponOutcome, function(x){strsplit(as.character(x), ' ')[[1]][1]}))
 reg_data$Age = age*(12*isageyears + 1*isagemonts + 0.25*isageweeks)
 
 reg_data = reg_data %>% select(OutcomeType, 
