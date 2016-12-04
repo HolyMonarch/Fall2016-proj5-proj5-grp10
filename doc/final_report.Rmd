@@ -73,15 +73,16 @@ rel_freqs = sort(sh_breeds_freq/breeds_freq, decreasing=T)
 plot_freqs = as.data.frame(rel_freqs)
 colnames(plot_freqs) = c('breed', 'val')
 
-color_overrep = colorRampPalette(c("red", "black")) (sum(plot_freqs$val>1)) 
-color_underrep = colorRampPalette(c("black", "green")) (sum(plot_freqs$val<=1)) 
+color_overrep = colorRampPalette(c('#ff7c7c', "black")) (sum(plot_freqs$val>1)) 
+color_underrep = colorRampPalette(c("black", '#a2f2be')) (sum(plot_freqs$val<=1)) 
 
-plot_ly(x = plot_freqs$breed,
-        y = log(plot_freqs$val),
+plot_ly(data = plot_freqs,
+        x = ~breed,
+        y = ~log(val),
         type = 'bar', 
-        text = plot_freqs$breed, 
+        text = ~breed, 
         hoverinfo = 'text', 
-        marker = list(color = c(color_overrep, color_underrep)), 
+        marker = list(color=c(color_overrep, color_underrep), line=list(color='rgb(0,0,0)', width = 1)), 
         width = 900) %>%
   layout(title = "Relative Frequency of Dog Breeds in Shelter",
          xaxis = list(title = "", tickangle = 45, position=.15, domain=c(0,.9)),
@@ -109,15 +110,16 @@ importance = sort(importance, decreasing=T)
 importance = as.data.frame(as.table(importance))
 colnames(importance) = c('pred', 'val')
 
-colors = rep(rgb(0,.4,0), nrow(importance))
-colors[importance$pred %in% c('Age','IsMale')] = rgb(.6,0,0) # change colors for predictors with neg influence based on logistic reg results
+colors = rep('#a2f2be', nrow(importance))
+colors[importance$pred %in% c('Age','IsMale')] = '#ff7c7c' # change colors for predictors with neg influence based on logistic reg results
 
-plot_ly(x = importance$pred,
-        y = log(importance$val),
+plot_ly(data = importance,
+        x = ~pred,
+        y = ~log(val),
         type = 'bar', 
-        text = importance$pred, 
+        text = ~pred, 
         hoverinfo = 'text', 
-        marker = list(color = colors), 
+        marker = list(color=colors, line=list(color='rgb(0,0,0)', width = 1)), 
         height = 400) %>%
   layout(title = "Predictors of Adoption",
          xaxis = list(title = "", position=.1, domain=c(0,.9)),
