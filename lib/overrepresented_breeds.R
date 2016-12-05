@@ -29,7 +29,7 @@ names(breed_count) = simplify_breeds(names(breed_count))
 # recount breeds after simplification
 breed_count = tapply(breed_count, names(breed_count), sum)
 
-# focus on pure breeds most common in shelter (n>9)
+# focus on pure breeds most common in shelter (n>14)
 sh_breeds = table(D$Breed[!grepl('mix|/', D$Breed)])
 sh_breeds = sh_breeds[sh_breeds>14]
 
