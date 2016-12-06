@@ -395,5 +395,67 @@ p
 
 
 ```
+```{r}
+# Dogs names vs outcome
+# deal with the data
+
+percent.out.name<-function(dataset){
+  
+  out_name<-matrix(nrow = 7 ,ncol = 2)
+  colnames(out_name)<-c("Have Name","No Name")
+  rownames(out_name)<-c("Return to Owner","Transfer",
+                     "Adoption","Euthanasia","Died","Missing","Disposal")
+
+ for (i in 1:7){
+     out_name[i,1]<-length(which(dataset$Name!=""&
+                                 dataset$`Outcome Type`==rownames(out_sex)[i]))/
+       length(which(dataset$Name!=""))
+     
+     out_name[i,2]<-length(which(dataset$Name == "" &
+                                 dataset$`Outcome Type`==rownames(out_sex)[i]))/
+       length(which(dataset$Name==""))
+ }
+  
+  return(data.frame(round(out_name*100,1)))
+}
+
+out_name<-percent.out.name(dog_data)
 
 
+
+p_1 <- plot_ly(out_name, x = ~Have.Name, y = ~reorder(rownames(out_name), Have.Name),
+              name = 'Outcome vs dogs who have a name',
+              type = 'bar', orientation = 'h',
+              marker = list(color = 'rgba(50, 171, 96, 0.6)',
+                            line = list(color = 'rgba(50, 171, 96, 1.0)', width = 1))) %>%
+  layout(yaxis = list(title = "",showgrid = FALSE, showline = FALSE, showticklabels = TRUE, domain= c(0, 0.85)),
+         xaxis = list(zeroline = FALSE, showline = FALSE, showticklabels = TRUE, showgrid = TRUE)) %>%
+  add_annotations(xref = 'x1', yref = 'y',
+                  x = ~Have.Name + 6,  y =rownames(out_name),
+                  text = paste( round(out_name$Have.Name, 1) , '%'),
+                  font = list(family = 'Arial', size = 12, color = 'rgb(50, 171, 96)'),
+                  showarrow = FALSE)
+
+p_2<-plot_ly(out_name, x = ~No.Name, y = ~reorder(rownames(out_name), Have.Name),
+              name = 'Outcome vs dogs who have no name',
+              type = 'bar', orientation = 'h',
+              marker = list(color = 'rgba(245, 182, 140,0.6)',
+                            line = list(color = 'rgba(245, 182, 140,0.6)', width = 1))) %>%
+  layout(yaxis = list(showgrid = FALSE, showline = TRUE, showticklabels = FALSE,domain= c(0, 0.85)),
+         xaxis = list(zeroline = FALSE, showline = FALSE, showticklabels = TRUE, showgrid = TRUE,side = 'top'))
+# %>%
+#   add_annotations(xref = 'x1', yref = 'y',
+#                   x = ~No.Name+6,  y =rownames(out_name),
+#                   text = paste( round(out_name$No.Name, 1) , '%'),
+#                   font = list(family = 'Arial', size = 12, color = 'rgb(245, 182, 140)'),
+#                   showarrow = FALSE)
+
+
+subplot(p_1, p_2) %>%
+  layout(title = 'Dogs have & no name for seven outcomes',
+         legend = list(x = 0.029, y = 1.038,
+                       font = list(size = 10)),
+         margin = list(l = 100, r = 20, t = 70, b = 70),
+         paper_bgcolor = 'rgb(248, 248, 255)',
+         plot_bgcolor = 'rgb(248, 248, 255)') 
+```
