@@ -388,7 +388,7 @@ A breed group is a categorization of related breeds of animal by an overseer org
 [Breed Group & Top Ten Breeds](http://127.0.0.1:8887/Hierarchical%20Bar.html) for the animals in this shelter.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-# The above html file is built based on json file and d3 javascript using the local file. We can run the code with a local web server. For simplification, we install the google chrome extension, Web Server for Chrome, to show this website.
+# The above html file is built based on json file and d3 javascript using the local file. We can run the code with a local web server. For simplification, we install the google chrome extension, Web Server for Chrome, to show this website. By using this plug-in, we can select the file where we store the .html and .json file and display the website.
 ```
 
 ####Breed VS. Outcome
