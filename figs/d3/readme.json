@@ -1,0 +1,127 @@
+{
+ "name": "Group",
+ "children": [
+  {
+   "name": "Herding",
+   "children": [
+    {"name": "German Shepherd", "size": 2192},
+    {"name": "Australian Cattle Dog", "size": 1342},
+    {"name": "Border Collie", "size": 916},
+    {"name": "Australian Shepherd", "size": 664},
+    {"name": "Catahoula", "size": 577},
+    {"name": "Australian Kelpie", "size": 343},
+    {"name": "Cardigan Welsh Corgi", "size": 250},
+    {"name": "Black Mouth Cur", "size": 235},
+    {"name": "Blue Lacy", "size": 160},
+    {"name": "Queensland Heeler", "size": 148}
+   ]
+  },
+  {
+   "name": "Hound",
+   "children": [
+    {"name": "Dachshund", "size": 1538},
+    {"name": "Beagle", "size": 594},
+    {"name": "Plott Hound", "size": 279},
+    {"name": "Basset Hound", "size": 206},
+    {"name": "Rhod Ridgeback", "size": 94},
+    {"name": "Whippet", "size": 85},
+    {"name": "Redbone Hound", "size": 83},
+    {"name": "Harrier", "size": 67},
+    {"name": "Greyhound", "size": 60},
+    {"name": "Italian Greyhound", "size": 51}
+   ]
+  },
+  {
+   "name": "Non-sporting",
+   "children": [
+    {"name": "American Bulldog", "size": 357},
+    {"name": "Chow Chow", "size": 263},
+    {"name": "Boston Terrier", "size": 185},
+    {"name": "Chinese Sharpei", "size": 177},
+    {"name": "Chinese Sharpei", "size": 158},
+    {"name": "English Bulldog", "size": 112},
+    {"name": "Dalmatian", "size": 49},
+    {"name": "Shiba Inu", "size": 47},
+    {"name": "Bichon Frise", "size": 46},
+    {"name": "French Bulldog", "size": 39}
+   ]
+  },
+  {
+   "name": "Sporting",
+   "children": [
+    {"name": "Labrador Retriever", "size": 4722},
+    {"name": "Pointer", "size": 346},
+    {"name": "Golden Retriever", "size": 234},
+    {"name": "Cocker Spaniel", "size": 207},
+    {"name": "Flat Coat Retriever", "size": 128},
+    {"name": "German Pointer", "size": 77},
+    {"name": "Weimaraner", "size": 75},
+    {"name": "Vizsla", "size": 65},
+    {"name": "Brittany", "size": 40},
+    {"name": "Chesa Bay Retr", "size": 33}
+   ]
+  },
+  {
+   "name": "Terrier",
+   "children": [
+    {"name": "Pit Bull", "size": 5788},
+    {"name": "Jack Russell Terrier", "size": 591},
+    {"name": "Rat Terrier", "size": 590},
+    {"name": "Miniature Schnauzer", "size": 516},
+    {"name": "Cairn Terrier", "size": 376},
+    {"name": "American Staffordshire Terrier", "size": 313},
+    {"name": "Staffordshire", "size": 282},
+    {"name": "American Pit Bull Terrier", "size": 200},
+    {"name": "Border Terrier", "size": 159},
+    {"name": "Manchester Terrier", "size": 148}
+   ]
+  },
+  {
+   "name": "Toy",
+   "children": [
+    {"name": "Chihuahua", "size": 5778},
+    {"name": "Chihuahua", "size": 878},
+    {"name": "Yorkshire Terrier", "size": 566},
+    {"name": "Shih Tzu", "size": 453},
+    {"name": "Maltese", "size": 262},
+    {"name": "Pug", "size": 256},
+    {"name": "Miniature Pinscher", "size": 238},
+    {"name": "Pomeranian", "size": 158},
+    {"name": "Toy Poodle", "size": 128},
+    {"name": "Pekingese", "size": 74}
+   ]
+  },
+  {
+   "name": "Working",
+   "children": [
+    {"name": "Boxer", "size": 884},
+    {"name": "Siberian Husky", "size": 547},
+    {"name": "Rottweiler", "size": 447},
+    {"name": "Great Pyrenees", "size": 401},
+    {"name": "Anatol Shepherd", "size": 302},
+    {"name": "Doberman Pinsch", "size": 188},
+    {"name": "Great Dane", "size": 155},
+    {"name": "Mastiff", "size": 95},
+    {"name": "Akita", "size": 59},
+    {"name": "Alaskan Husky", "size": 53}
+   ]
+  },
+  {
+   "name": "Other-animal",
+   "children": [
+    {"name": "Bat", "size": 2008},
+    {"name": "Siamese", "size": 1046},
+    {"name": "Raccoon", "size": 826},
+    {"name": "Rabbit Sh", "size": 252},
+    {"name": "Opossum", "size": 234},
+    {"name": "Snowshoe", "size": 206},
+    {"name": "Skunk", "size": 138},
+    {"name": "Maine Coon", "size": 130},
+    {"name": "Manx", "size": 118},
+    {"name": "Guinea Pig", "size": 110}
+   ]
+  },
+  {"name": "Others", "size": 735},
+  {"name": "Domestic", "size": 25207}
+ ]
+}
