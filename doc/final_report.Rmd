@@ -35,7 +35,7 @@ colnames(shelter_data_new)[1:20]
 colnames(shelter_data_new)
 ```
 
-##Analysis
+##Outcome Type
 We started to look at the frequency of the outcome. As shown below, the largest four components are adoption, transfer, return to owner, and euthanasia. Because the other components make up a small component, we set a primary forcus on the others. 
 
 
@@ -46,10 +46,12 @@ Outcome <-Outcome %>%
   group_by(Type) %>%
   summarise(freq = length(Type))
 
+m <- list(l = 50, r = 50, b = 50, t = 50, pad = 4)
 o_piechart <- plot_ly(Outcome, labels = ~Type, values = ~freq, type = 'pie',marker = list(colors = terrain_hcl(9))) %>%
   layout(title = 'Percentage of Outcome',
          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
-         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE)) %>%
+  layout(autosize = F, width = 900, height = 450, margin = m)
 o_piechart
 ```
 
@@ -58,7 +60,7 @@ o_piechart
 ####Seasonality
 To start, we looked at the seasonality of the animals in the shelter. From the graph, we noticed that there seems to be some seasonality between the animals. However, when we furthered divided the animals we noticed there is a large seasonlity component for cats. This is not present for dogs. We can conclude there is very little seasonality for dogs. 
 
-```{r seasonality graph, echo = FALSE}
+```{r seasonality graph, echo=FALSE, message=FALSE, warning=FALSE}
 animal.num<-function(dataset){
   record_time<-seq(as.Date("2013-10-01"),as.Date("2015-09-30"),by="day")
   n<-length(record_time)
@@ -113,7 +115,7 @@ Seasonality<-plot_ly(group_animal_num, x=~`Record Time`, y=~Dog,
   add_trace(y=~Bird,type='scatter', mode = 'lines',name='Birds',
         line =  list(color = 'rrgb(244, 220, 66)', width = 2),visible = "legendonly")%>%
   add_trace(y=~All,type='scatter', mode = 'lines',name='All',
-        line =  list(color = "red", width = 3),visible = TRUE)%>%
+        line =  list(color = "red", width = 3),visible = TRUE) %>%
   layout(title = "Numbers of group in shelter over time",
           xaxis = list(
           rangeselector = list(
@@ -123,13 +125,13 @@ Seasonality<-plot_ly(group_animal_num, x=~`Record Time`, y=~Dog,
               list(count = 1,label = "1 yr",step = "year",stepmode = "backward"),
               list(step = "all"))),
           rangeslider = list(type = "date")),
-          yaxis = list(title = "",showgrid = FALSE,zeroline = FALSE,showline = FALSE))
+          yaxis = list(title = "",showgrid = FALSE,zeroline = FALSE,showline = FALSE)) %>%
+  layout(autosize = F, width = 900, height = 450)
 Seasonality
 ```
 
 
 ####Days in shelter VS. Outcome
-
 We also anaylized how the number of days in the shelter affected the outcome of the dog. From the graph, we can note that majority of the dogs stay for less than 10 days. For dogs who return to owners, they are more quickly returned than dogs who are adopted.
 
 ```{r shelter days vs outcome, echo=FALSE, message=FALSE, warning=FALSE}
@@ -161,16 +163,16 @@ out.days<-function(dataset){
 out_days<-out.days(dog_data)
 
 shelter_days<-plot_ly(out_days, y = ~Days, x = ~Outcome.Type, color = ~Outcome.Type, type = 'box')%>%
-  layout(title='Days in shelter vs Outcome type')
+  layout(title='Days in shelter vs Outcome type') %>%
+  layout(autosize = F, width = 900, height = 450)
 shelter_days
 ```
 
 
-####Dog Name VS. Outcome
-
+####Dog name VS. Outcome
 We then analyzed if a dog has a name, how it will affect its outcome. As we can see, there seem to be a higher rate of being returned to owner if the dog has a name. There is also a significant increase for a dog to be transferred if it has no name. The adoption rate, however remains the same. 
 
-```{r names vs. outcome, echo = FALSE}
+```{r names vs. outcome, echo=FALSE, message=FALSE, warning=FALSE}
 # Dogs names vs outcome
 # deal with the data
 
@@ -219,7 +221,8 @@ subplot(name, no_name) %>%
                        font = list(size = 10)),
          margin = list(l = 100, r = 20, t = 70, b = 70),
          paper_bgcolor = 'rgb(248, 248, 255)',
-         plot_bgcolor = 'rgb(248, 248, 255)') 
+         plot_bgcolor = 'rgb(248, 248, 255)') %>%
+  layout(autosize = F, width = 900, height = 450)
 
 ```
 
@@ -227,7 +230,7 @@ subplot(name, no_name) %>%
 ####Sex Vs. Outcome
 We then noticed that the gender of the dog is divided into four categories: Neutered Male, Spayed Female, Intact Female, and Intact Male. For the dogs being returned to the owner, we noticed there is a larger spike for a specific dog to be a neutered male. All other categories remain the same. 
 
-```{r Sex vs outcome, echo = FALSE}
+```{r Sex vs outcome, echo=FALSE, message=FALSE, warning=FALSE}
 #Deal with the data
 percent.out.sex<-function(dataset){
   out_sex<-matrix(nrow = 4 ,ncol = 4)
@@ -273,18 +276,18 @@ sex <- plot_ly(out_sex, x = ~Neutered.Male, y = rownames(out_sex), type = 'bar',
                   text = rownames(out_sex),
                   font = list(family = 'Arial', size = 12,
                               color = 'rgb(67, 67, 67)'),
-                  showarrow = FALSE, align = 'right') 
-
+                  showarrow = FALSE, align = 'right') %>%
+  layout(autosize = F, width = 900, height = 450)
 sex
-
 ```
 
 
-###Breeds
+##Dog Breeds
+
 #### Frequency of breeds in shelter relative to their baseline frequency
 Here we compare the frequency of each pure breed in the shelter relative to its baseline frequency in American homes. Positive values (red colors) indicate over-represented breeds in the shelter. These are, presumably, breeds more likely to be abandoned. Negative values (green) indicate the opposite.
 
-```{r analysis2, warning=FALSE, message=FALSE, echo=FALSE}
+```{r baseline comparision, warning=FALSE, message=FALSE, echo=FALSE}
 D = shelter_data_new
 D = D[D$`Animal Type`=='Dog',]
 D$Breed = tolower(D$Breed)
@@ -350,15 +353,18 @@ plot_ly(data = plot_freqs,
          yaxis = list(title = "<- Less than Expected | More than Expected ->                          .", 
                       domain=c(.13,1)))
 ```
+
 Keeping in mind, this only shows pure breed dogs. We can see that there are selective dogs that are more likely to end up in the pound such as Austrilian Cattle Dog. Popular dogs such a goldren retriver appears less. 
+
 
 ####Breed VS. Outcome
 We then studied if the dog breed function effects the outcome of the dog. In particular, we focuesed on adoption. After recategorizing the dogs based on breed, function, and mix. We categorized the dog into 36 categories. Then we got the outcome ratio. 
 
-```{r breeds group vs outcome, echo = FALSE}
+```{r breeds group vs outcome, echo=FALSE, message=FALSE, warning=FALSE}
 outcome = c("Return to Owner","Transfer","Adoption","Euthanasia")
 
 adoption_rate = data.frame(Breed = c(unique(D$Breed_New)), Adoption = 0, Euthanasia = 0, `Return to Owner` = 0, Transfer = 0)
+
 for (i in 1:dim(adoption_rate)[1]){
   x = adoption_rate[i,]
   table = D %>% filter(`Outcome Type` %in% outcome) %>%
@@ -377,9 +383,15 @@ for (i in 1:dim(adoption_rate)[1]){
     adoption_rate$Transfer[i] = freq[which(table$`Outcome Type` == "Transfer")]
   }
 }
+
 adoption_rate = adoption_rate[order(adoption_rate$Adoption),]
 adoption_rate$Breed = factor(adoption_rate$Breed, levels = adoption_rate$Breed)
 
+f1 = list(family = "Arial, sans-serif", size = 16, color = "lightgrey")
+f2 = list(family = "Old Standard TT, serif", size = 10, color = "black")
+a = list(titlefont = f1, showticklabels = TRUE, tickangle = 45, tickfont = f2,
+         exponentformat = "E")
+m <- list(l = 50, r = 50, b = 180, t = 50, pad = 4)
 breed_plot <- plot_ly(adoption_rate, x = ~Breed, y = ~Adoption, type = 'bar', name = 'Adoption rate',
         marker = list(color = rainbow_hcl(4)[1],
                       line = list(width = 3))) %>%
@@ -394,42 +406,10 @@ breed_plot <- plot_ly(adoption_rate, x = ~Breed, y = ~Adoption, type = 'bar', na
                           line = list(width = 3))) %>%
   layout(barmode = 'stack',
          xaxis = list(title = ""),
-         yaxis = list(title =""))
+         yaxis = list(title ="")) %>%
+  layout(autosize = F, width = 900, height = 450, margin = m)
 breed_plot
-```
-*Non-sporting & Others only consists of one dog
 
-We noticed that hound dog seem to have the highest rate of adoption. 
-```{r, echo = FALSE}
-rev(adoption_rate$Breed)
-```
-
-
-```{r echo = FALSE}
-# f1 <- list(
-#   family = "Arial, sans-serif",
-#   size = 16,
-#   color = "lightgrey"
-# )
-# f2 <- list(
-#   family = "Old Standard TT, serif",
-#   size = 10,
-#   color = "black"
-# )
-# a <- list(
-#   titlefont = f1,
-#   showticklabels = TRUE,
-#   tickangle = 45,
-#   tickfont = f2,
-#   exponentformat = "E"
-# )
-# m <- list(
-#   l = 50,
-#   r = 50,
-#   b = 100,
-#   t = 100,
-#   pad = 4
-# )
 # plot_ly(adoption_rate, x = ~Breed, y = ~Adoption, name = 'Adoption rate', type = 'scatter', mode = 'lines') %>%
 #   add_trace(y = ~Euthanasia, name = 'Euthanasia rate', mode = 'lines') %>%
 #   add_trace(y = ~Return.to.Owner, name = 'Return to Owner rate', mode = 'lines') %>%
@@ -438,10 +418,18 @@ rev(adoption_rate$Breed)
 #          yaxis = list(title = ''), xaxis = a) %>% 
 #          layout(autosize = F, width = 1000, height = 500, margin = m)
 ```
+* Non-sporting & Others only consists of one dog
 
-####Networking
-We furthered wanted to see the path a dog will take once it enters the shelter. 
-```{r sankey network, echo = FALSE}
+We noticed that hound dog seem to have the highest rate of adoption. And pure dogs, such as non-sporting, terrier and working, had high rate of return to owners.
+```{r, echo = FALSE}
+rev(adoption_rate$Breed)
+```
+
+
+##Transition Path
+We furthered wanted to see the path a dog will take once it enters the shelter. The following three bars represent intake type, intake condition and outcome type, individually.
+
+```{r sankey network, echo=FALSE, message=FALSE, warning=FALSE}
 #Sankey network
 #Create the data
 sankey.data<-function(dataset){
@@ -487,15 +475,11 @@ sankey<-sankeyNetwork(Links = kk$links, Nodes = kk$nodes, Source = "source",
 sankey
 ```
 
-\
-\
 
-
-##Predicting dog adoption
+##Dog Outcome Type Prediction
 We now look at what characteristics make a dog more likely to be adopted. We ran a logistic regression to predict adoption outcome. Below we show, ranked by importance, the different predictors. Green indicates a positive influence of the predictor, red indicates a negative influence.   
-\
 
-```{r analysis3, warning=FALSE, message=FALSE, echo=FALSE}
+```{r outcome prediction, warning=FALSE, message=FALSE, echo=FALSE}
 
 # load relevant output of logistic regression:
 load('../output/lrt_log_reg.RData')
@@ -510,6 +494,7 @@ colnames(importance) = c('pred', 'val')
 colors = rep('#a2f2be', nrow(importance))
 colors[importance$pred %in% c('Age','IsMale')] = '#ff7c7c' # change colors for predictors with neg influence based on logistic reg results
 
+m <- list(l = 50, r = 50, b = 50, t = 50, pad = 4)
 plot_ly(data = importance,
         x = ~pred,
         y = ~log(val),
@@ -520,43 +505,7 @@ plot_ly(data = importance,
         height = 400) %>%
   layout(title = "Predictors of Adoption",
          xaxis = list(title = "", position=.1, domain=c(0,.9)),
-         yaxis = list(title = "Importance [log(deviance/df)]", domain=c(.1,1)))
+         yaxis = list(title = "Importance [log(deviance/df)]", domain=c(.1,1))) %>%
+  layout(autosize = F, width = 900, height = 450, margin = m)
 
 ```
-\
-\
-
-
-
-<!-- #### Types of dog intake, types of dog outcome and their association -->
-<!-- \ -->
-
-<!-- There are four main types of dog intake at the shelter (Stray, Owner Surrener, Public Assist and Euthnasia Request) and four main types of outcome (Adoption, Transfer, Return to Owner and Euthanasia). -->
-<!-- Here we look at the frequencies of each outcome type for each type of intake. -->
-<!-- \ -->
-<!-- \ -->
-
-
-<!-- ```{r analysis1, warning=FALSE, message=FALSE, echo=FALSE} -->
-
-<!-- D %>%  -->
-<!--   mutate(intake = `Intake Type`, outcome = `Outcome Type`) %>% -->
-<!--   filter(!outcome %in% c('', 'Died','Disposal','Missing')) %>% -->
-<!--   count(intake, outcome) %>% -->
-<!--   plot_ly(x = ~intake,  -->
-<!--           y = ~n,  -->
-<!--           color = ~outcome,  -->
-<!--           marker = list(line=list(color='black', width = 1)),  -->
-<!--           width = 900) %>% -->
-<!--   layout(title = "Shelter dog intake types and outcomes", -->
-<!--          xaxis = list(title = "Intake Type"), -->
-<!--          yaxis = list(title = "Number")) -->
-<!-- ``` -->
-<!-- \ -->
-<!-- \ -->
-
-
-```
-
-
-
