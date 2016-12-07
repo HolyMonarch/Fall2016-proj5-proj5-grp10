@@ -365,7 +365,58 @@ plot_ly(data = plot_freqs,
 
 
 ```{r}
-#SPEYER DIAGRAM FROM YING
+#Sankey network
+
+#Create the data
+library(networkD3)
+sankey.data<-function(dataset){
+  
+  sdata<-dataset[which(
+  dataset$`Outcome Type`=="Return to Owner"|
+    dataset$`Outcome Type`=="Transfer"|
+    dataset$`Outcome Type`=="Adoption"|
+    dataset$`Outcome Type`=="Euthanasia"),]
+  
+  
+  dog_nodes<-c(unique(dataset$`Intake Type`),unique(dataset$`Intake Condition`),
+             "Return to Owner","Transfer","Adoption","Euthanasia" )
+  dog_link<-matrix(nrow = 64, ncol = 3 )
+  dog_link[,1]<-c(rep(0,8),rep(1,8),rep(2,8),rep(3,8),
+                rep(4,4),rep(5,4),rep(6,4),rep(7,4),
+                rep(8,4),rep(9,4),rep(10,4),rep(11,4))
+  dog_link[,2]<-c(rep(4:11,4),rep(12:15,8))
+  
+  
+  for (i in 1:64){
+    if(i<=32){
+      dog_link[i,3]<-length(which(sdata$`Intake Type`==dog_nodes[dog_link[i,1]+1] & 
+               sdata$`Intake Condition`== dog_nodes[dog_link[i,2]+1]))
+      }else{
+        dog_link[i,3]<-length(which(sdata$`Intake Condition`==dog_nodes[dog_link[i,1]+1] &
+                                      sdata$`Outcome Type`== dog_nodes[dog_link[i,2]+1]))
+      }
+  }
+  
+  
+  
+  colnames(dog_link)<-c("source","target","value")
+  
+  haha<-list()
+  haha$nodes<-as.data.frame(dog_nodes)
+  haha$links<-as.data.frame(dog_link)
+  
+  return(haha)
+  
+}
+
+
+kk<-sankey.data(dog_data)
+p10<-sankeyNetwork(Links = kk$links, Nodes = kk$nodes, Source = "source",
+              Target = "target", Value = "value", NodeID = "dog_nodes",
+              units = "", fontSize = 12, nodeWidth = 40,nodePadding = 8,
+              margin = NULL, height = 400, width = 800,
+              colourScale = JS("d3.scale.category20()"))
+p10
 ```
 
 \
