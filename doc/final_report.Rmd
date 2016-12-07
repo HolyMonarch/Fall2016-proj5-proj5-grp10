@@ -3,6 +3,11 @@ title: "Shelter Dogs"
 output: html_document
 ---
 
+
+
+#Where Am I Going?
+Gerneal information on shelters
+Our data is taken from Kaggles' Shelter competition. This data composes information from one shelter in Austin, Texas between the spam of 2013 to 2015. It includes over 30000 domistic animals. We focused particularily on dogs. 
 \
 \
 
@@ -20,34 +25,26 @@ D = D[D$`Animal Type`=='Dog',]
 D$Breed = tolower(D$Breed)
 ```
 
+##DataSet vs.Outcome 
+We started by analyzing individual topic within the dataset vesus its outcome. To start, we looked at the seasonality of the animals in the shelter. 
 
-#### Types of dog intake, types of dog outcome and their association
-\
-
-There are four main types of dog intake at the shelter (Stray, Owner Surrener, Public Assist and Euthnasia Request) and four main types of outcome (Adoption, Transfer, Return to Owner and Euthanasia).
-Here we look at the frequencies of each outcome type for each type of intake.
-\
-\
-
-
-```{r analysis1, warning=FALSE, message=FALSE, echo=FALSE}
-
-D %>% 
-  mutate(intake = `Intake Type`, outcome = `Outcome Type`) %>%
-  filter(!outcome %in% c('', 'Died','Disposal','Missing')) %>%
-  count(intake, outcome) %>%
-  plot_ly(x = ~intake, 
-          y = ~n, 
-          color = ~outcome, 
-          marker = list(line=list(color='black', width = 1)), 
-          width = 900) %>%
-  layout(title = "Shelter dog intake types and outcomes",
-         xaxis = list(title = "Intake Type"),
-         yaxis = list(title = "Number"))
+```{r}
+#ADD CODE FOR SEASONLITY HERE FOR ALL AND BY ANIMAL
 ```
-\
-\
 
+From the graph, we noticed that there seems to be some seasonality between the animals. However, when we furthered divided the animals we noticed there is a large seasonlity component for cats. This is not present for dogs. 
+/
+We then analyzed if a dog has a name, how it will affect its outcome. 
+
+```{r}
+#ADD CODE FOR NAME
+```
+This data came as expected. [CONTINUE WRITING HERE]
+/
+
+```{r}
+#SEX TYPE VS OUTCOME
+```
 
 #### Frequency of breeds in shelter relative to their baseline frequency
 \
@@ -118,7 +115,16 @@ plot_ly(data = plot_freqs,
          xaxis = list(title = "", tickangle = 45, position=.15, domain=c(0,.9)),
          yaxis = list(title = "<- Less than Expected | More than Expected ->                          .", 
                       domain=c(.13,1)))
+
+
 ```
+
+
+
+```{r}
+#SPEYER DIAGRAM FROM YING
+```
+
 \
 \
 
@@ -159,6 +165,38 @@ plot_ly(data = importance,
 ```
 \
 \
+
+
+
+<!-- #### Types of dog intake, types of dog outcome and their association -->
+<!-- \ -->
+
+<!-- There are four main types of dog intake at the shelter (Stray, Owner Surrener, Public Assist and Euthnasia Request) and four main types of outcome (Adoption, Transfer, Return to Owner and Euthanasia). -->
+<!-- Here we look at the frequencies of each outcome type for each type of intake. -->
+<!-- \ -->
+<!-- \ -->
+
+
+<!-- ```{r analysis1, warning=FALSE, message=FALSE, echo=FALSE} -->
+
+<!-- D %>%  -->
+<!--   mutate(intake = `Intake Type`, outcome = `Outcome Type`) %>% -->
+<!--   filter(!outcome %in% c('', 'Died','Disposal','Missing')) %>% -->
+<!--   count(intake, outcome) %>% -->
+<!--   plot_ly(x = ~intake,  -->
+<!--           y = ~n,  -->
+<!--           color = ~outcome,  -->
+<!--           marker = list(line=list(color='black', width = 1)),  -->
+<!--           width = 900) %>% -->
+<!--   layout(title = "Shelter dog intake types and outcomes", -->
+<!--          xaxis = list(title = "Intake Type"), -->
+<!--          yaxis = list(title = "Number")) -->
+<!-- ``` -->
+<!-- \ -->
+<!-- \ -->
+
+
+```
 
 
 
