@@ -106,21 +106,6 @@
     {"name": "Alaskan Husky", "size": 53}
    ]
   },
-  {
-   "name": "Other-animal",
-   "children": [
-    {"name": "Bat", "size": 2008},
-    {"name": "Siamese", "size": 1046},
-    {"name": "Raccoon", "size": 826},
-    {"name": "Rabbit Sh", "size": 252},
-    {"name": "Opossum", "size": 234},
-    {"name": "Snowshoe", "size": 206},
-    {"name": "Skunk", "size": 138},
-    {"name": "Maine Coon", "size": 130},
-    {"name": "Manx", "size": 118},
-    {"name": "Guinea Pig", "size": 110}
-   ]
-  },
   {"name": "Others", "size": 735},
   {"name": "Domestic", "size": 25207}
  ]

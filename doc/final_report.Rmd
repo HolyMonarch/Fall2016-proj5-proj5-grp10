@@ -373,6 +373,19 @@ plot_ly(data = plot_freqs,
 
 Keeping in mind, this only shows pure breed dogs. We can see that there are selective dogs that are more likely to end up in the pound such as Austrilian Cattle Dog. Popular dogs such a goldren retriver appears less. 
 
+####Breed Group
+
+A breed group is a categorization of related breeds of animal by an overseer organization, used to organize the showing of animals. In dogs, kennel clubs define the Breed Groups and decide which dog breeds are to be included in each breed group.
+
+* Herding   
+* Working
+* Toy
+* Hound
+* Terrier
+* Sporting
+* Non-sporting
+
+[Breed Group & Top Ten Breeds](http://127.0.0.1:8887/Hierarchical%20Bar.html) for the animals in this shelter.
 
 ####Breed VS. Outcome
 We then studied if the dog breed function effects the outcome of the dog. In particular, we focuesed on adoption. After recategorizing the dogs based on breed, function, and mix. We categorized the dog into 36 categories. Then we got the outcome ratio. 
