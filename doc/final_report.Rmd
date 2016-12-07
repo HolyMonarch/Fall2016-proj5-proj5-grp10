@@ -387,6 +387,10 @@ A breed group is a categorization of related breeds of animal by an overseer org
 
 [Breed Group & Top Ten Breeds](http://127.0.0.1:8887/Hierarchical%20Bar.html) for the animals in this shelter.
 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# The above html file is built based on json file and d3 javascript using the local file. We can run the code with a local web server. For simplification, we install the google chrome extension, Web Server for Chrome, to show this website.
+```
+
 ####Breed VS. Outcome
 We then studied if the dog breed function effects the outcome of the dog. In particular, we focuesed on adoption. After recategorizing the dogs based on breed, function, and mix. We categorized the dog into 36 categories. Then we got the outcome ratio. 
 
