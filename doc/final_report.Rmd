@@ -509,3 +509,15 @@ plot_ly(data = importance,
   layout(autosize = F, width = 900, height = 450, margin = m)
 
 ```
+
+
+\
+\
+
+
+| Final Classifier | Testing Error Rate |
+|------|------|
+| GBM with 50 trees | 21% |
+
+\
+\
