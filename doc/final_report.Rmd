@@ -29,21 +29,264 @@ D$Breed = tolower(D$Breed)
 We started by analyzing individual topic within the dataset vesus its outcome. To start, we looked at the seasonality of the animals in the shelter. 
 
 ```{r}
-#ADD CODE FOR SEASONLITY HERE FOR ALL AND BY ANIMAL
+
+data<-shelter_data_new
+
+animal.num<-function(dataset){
+  
+  record_time<-seq(as.Date("2013-10-01"),as.Date("2015-09-30"),by="day")
+  n<-length(record_time)
+  
+  take_in_num<-vector()
+  for (i in 1:n){
+  take_in_num[i]<-length(which(dataset$`Intake Date`<= record_time[i]))
+  }
+
+  take_out_num<-vector()
+  for (i in 1:n){
+  take_out_num[i]<-length(which(dataset$`Outcome Date`<= record_time[i]))
+  }
+  
+  animal_in_shelter<-take_in_num-take_out_num
+
+  return(data.frame(record_time,animal_in_shelter))
+  
+}
+
+all_type_animal_num<-animal.num(data)
+
+p2<-plot_ly(x=~record_time,y=~animal_in_shelter,
+            data =all_type_animal_num ,type = 'scatter', mode = 'lines')%>%
+  layout(title = "Animal Numbers in Shelter over time",
+         xaxis = list(title = "", tickangle = 45, position=.15, domain=c(0,.9)),
+         yaxis = list(title = " ", domain=c(.13,1)))
+p2
+
+### Animal numbers in shelter days to days (Group by cats and dogs)
+# unique(data$`Animal Type`) 
+# "Dog"       "Cat"       "Livestock" "Other"     "Bird" 
+
+animal.type.num<-function(dataset){
+  
+  dog_data<-dataset[which(dataset$`Animal Type`=="Dog"),]
+  cat_data<-dataset[which(dataset$`Animal Type`=="Cat"),]
+  livestock_data<-dataset[which(dataset$`Animal Type`=="Livestock"),]
+  other_data<-dataset[which(dataset$`Animal Type`=="Other"),]
+  bird_data<-dataset[which(dataset$`Animal Type`=="Bird"),]
+
+  
+  dog_num<-animal.num(dog_data)
+  cat_num<-animal.num(cat_data)
+  livestock_num<-animal.num(livestock_data)
+  other_num<-animal.num(other_data)
+  bird_num<-animal.num(bird_data)
+  
+  
+  hehe<-data.frame(dog_num,cat_num[,2],livestock_num[,2],other_num[,2],bird_num[,2])
+  colnames(hehe)<-c("Record Time",unique(data$`Animal Type`))
+  
+  return(hehe)
+}
+
+group_animal_num<-animal.type.num(data)
+
+# plot
+
+
+
+p3<-plot_ly(group_animal_num, x=~`Record Time`, y=~Dog,
+        type = 'scatter', mode = 'lines',name='dogs',
+        line = list(color = 'rgb(126, 172, 247)', width = 2))%>%
+  add_trace(y=~Cat,type = 'scatter', mode = 'lines',name='cats',
+        line =  list(color = 'rgb(110, 209, 146)', width = 2))%>%
+  add_trace(y=~Livestock,type='scatter', mode = 'lines',name='livestock',
+        line =  list(color = 'rgb(216, 137, 110)', width = 2))%>%
+  add_trace(y=~Other,type='scatter', mode = 'lines',name='other',
+        line =  list(color = 'rgb(149, 153, 193)', width = 2))%>%
+  add_trace(y=~Bird,type='scatter', mode = 'lines',name='birds',
+        line =  list(color = 'rrgb(244, 220, 66)', width = 2))%>%
+   layout(title = "Numbers of group in shelter over time", 
+          xaxis = list(title = "",showgrid = FALSE),
+          yaxis = list(title = "",showgrid = FALSE,
+                       zeroline = FALSE,showline = FALSE)) 
+
+## Interesting founding: cat numbers in shelter has a seasonal change.
 ```
 
 From the graph, we noticed that there seems to be some seasonality between the animals. However, when we furthered divided the animals we noticed there is a large seasonlity component for cats. This is not present for dogs. 
+
+```{r}
+# Outcome vs days in shelter.
+
+
+dog_data<-data[which(data$`Animal Type`=="Dog"),]
+
+
+
+out.days<-function(dataset){
+  
+  dog_days_in_shelter<-as.Date(dataset$`Outcome Date`,"%y-%m-%d")-
+    as.Date(dataset$`Intake Date`,"%y-%m-%d")
+  
+  #Check for the error then correct them 
+  dog_days_in_shelter[which(dog_days_in_shelter<0)]=
+    abs(dog_days_in_shelter[which(dog_days_in_shelter<0)])
+  
+  out_days<-data.frame(dog_days_in_shelter,dog_data$`Outcome Type`)[which(
+    dataset$`Outcome Type`=="Return to Owner"|
+    dataset$`Outcome Type`=="Transfer"|
+    dataset$`Outcome Type`=="Adoption"|
+    dataset$`Outcome Type`=="Euthanasia"
+  ),]
+  
+  out_days[,2]<-as.factor(as.character(out_days[,2]))
+  out_days<-data.frame(as.numeric(out_days[,1]),out_days[,2])
+  colnames(out_days)<-c("Days","Outcome.Type")
+  
+  return(out_days)
+}
+
+out_days<-out.days(dog_data)
+
+
+p8<-plot_ly(out_days, y = ~Days, x = ~Outcome.Type,
+            color = ~Outcome.Type, 
+            type = 'box')%>%
+  layout(title='Days in shelter vs Outcome type')
+p8
+```
+
 /
 We then analyzed if a dog has a name, how it will affect its outcome. 
 
 ```{r}
-#ADD CODE FOR NAME
+# Dogs names vs outcome
+# deal with the data
+
+percent.out.name<-function(dataset){
+  
+  out_name<-matrix(nrow = 4 ,ncol = 2)
+  colnames(out_name)<-c("Have Name","No Name")
+  rownames(out_name)<-c("Return to Owner","Transfer",
+                     "Adoption","Euthanasia")
+
+ for (i in 1:4){
+     out_name[i,1]<-length(which(dataset$Name!=""&
+                                 dataset$`Outcome Type`==rownames(out_name)[i]))/
+       length(which(dataset$Name!=""))
+     
+     out_name[i,2]<-length(which(dataset$Name == "" &
+                                 dataset$`Outcome Type`==rownames(out_name)[i]))/
+       length(which(dataset$Name==""))
+ }
+  
+  return(data.frame(round(out_name*100,1)))
+}
+
+#Create the data
+
+out_name<-percent.out.name(dog_data)
+
+p_1 <- plot_ly(out_name, x = ~Have.Name, y = ~reorder(rownames(out_name), Have.Name),
+              name = 'Outcome vs dogs who have a name',
+              type = 'bar', orientation = 'h',
+              marker = list(color = 'rgba(50, 171, 96, 0.6)',
+                            line = list(color = 'rgba(50, 171, 96, 1.0)', width = 1))) %>%
+  layout(yaxis = list(title = "",showgrid = FALSE, 
+                      showline = FALSE, showticklabels = TRUE, domain= c(0, 0.85)),
+         xaxis = list(zeroline = FALSE, showline = FALSE, showticklabels = TRUE, showgrid = TRUE))
+
+p_2<-plot_ly(out_name, x = ~No.Name, y = ~reorder(rownames(out_name), Have.Name),
+              name = 'Outcome vs dogs who have no name',
+              type = 'bar', orientation = 'h',
+              marker = list(color = 'rgba(245, 182, 140,0.6)',
+                            line = list(color = 'rgba(245, 182, 140,0.6)', width = 1))) %>%
+  layout(yaxis = list(showgrid = FALSE, showline = TRUE, 
+                      showticklabels = FALSE,domain= c(0, 0.85)),
+         xaxis = list(zeroline = FALSE, showline = FALSE, 
+                      showticklabels = TRUE, showgrid = TRUE,side = 'top'))
+
+subplot(p_1, p_2) %>%
+  layout(title = 'Dogs have & no name for seven outcomes in percentage',
+         legend = list(x = 0.029, y = 1.038,
+                       font = list(size = 10)),
+         margin = list(l = 100, r = 20, t = 70, b = 70),
+         paper_bgcolor = 'rgb(248, 248, 255)',
+         plot_bgcolor = 'rgb(248, 248, 255)') 
+
 ```
 This data came as expected. [CONTINUE WRITING HERE]
 /
 
 ```{r}
-#SEX TYPE VS OUTCOME
+#From this on, we focus on dogs
+#Outcome vs sex 
+
+
+#Deal with the data
+
+percent.out.sex<-function(dataset){
+  out_sex<-matrix(nrow = 4 ,ncol = 4)
+  colnames(out_sex)<-c("Neutered Male","Spayed Female","Intact Female","Intact Male")
+  rownames(out_sex)<-c("Return to Owner","Transfer","Adoption","Euthanasia")
+
+ for (i in 1:4){
+   for (j in 1:4){
+     out_sex[i,j]<-length(which(dataset$`Sex upon Intake`==colnames(out_sex)[j]&
+                                 dataset$`Outcome Type`==rownames(out_sex)[i]))/
+       length(which(dataset$`Outcome Type`==rownames(out_sex)[i]))
+   }
+ }
+  
+  out_sex<-data.frame(round(out_sex*100,1))
+  
+  return(out_sex)
+}
+
+
+out_sex<-percent.out.sex(dog_data)
+
+
+#Plot
+
+top_labels <- colnames(out_sex)
+
+p7 <- plot_ly(out_sex, x = ~Neutered.Male, y = rownames(out_sex), type = 'bar', orientation = 'h',
+             marker = list(color = 'rgba(17, 4, 4, 0.8)',
+                           line = list(color = 'rgb(248, 248, 249)', width = 1)),
+             name='Neutered<br>Male') %>%
+  add_trace(x = ~Spayed.Female, marker = list(color = 'rgba(165, 58, 16, 0.8)'),
+            name='Spayed<br>Female') %>%
+  add_trace(x = ~Intact.Female, marker = list(color = 'rgba(196, 101, 29, 0.8)'),
+            name='Intact<br>Female') %>%
+  add_trace(x = ~Intact.Male, marker = list(color = 'rgba(232, 167, 118, 0.85)'),
+            name='Intact<br>Male') %>%
+  layout(xaxis = list(title = "",
+                      showgrid = FALSE,
+                      showline = FALSE,
+                      showticklabels = FALSE,
+                      zeroline = FALSE,
+                      domain = c(0.15, 1)),
+         yaxis = list(title = "",
+                      showgrid = FALSE,
+                      showline = FALSE,
+                      showticklabels = FALSE,
+                      zeroline = FALSE),
+         title = "Outcome types v.s. Sex Type upon Intake",
+         barmode = 'stack',
+         paper_bgcolor = 'rgb(248, 248, 255)', plot_bgcolor = 'rgb(248, 248, 255)',
+         margin = list(l = 120, r = 10, t = 140, b = 80)
+         ) %>%
+  # labeling the y-axis
+  add_annotations(xref = 'paper', yref = 'y', x = 0.14, y = rownames(out_sex),
+                  xanchor = 'right',
+                  text = rownames(out_sex),
+                  font = list(family = 'Arial', size = 12,
+                              color = 'rgb(67, 67, 67)'),
+                  showarrow = FALSE, align = 'right') 
+
+p7
+
 ```
 
 #### Frequency of breeds in shelter relative to their baseline frequency
