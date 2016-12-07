@@ -57,7 +57,7 @@ o_piechart
 
 ##Dataset vs.Outcome 
 
-####Seasonality
+###Seasonality
 To start, we looked at the seasonality of the animals in the shelter. From the graph, we noticed that there seems to be some seasonality between the animals. However, when we furthered divided the animals we noticed there is a large seasonlity component for cats. This is not present for dogs. We can conclude there is very little seasonality for dogs. 
 
 ```{r seasonality graph, echo=FALSE, message=FALSE, warning=FALSE}
@@ -131,7 +131,7 @@ Seasonality
 ```
 
 
-####Days in shelter VS. Outcome
+###Days in shelter VS. Outcome
 We also anaylized how the number of days in the shelter affected the outcome of the dog. From the graph, we can note that majority of the dogs stay for less than 10 days. For dogs who return to owners, they are more quickly returned than dogs who are adopted.
 
 ```{r shelter days vs outcome, echo=FALSE, message=FALSE, warning=FALSE}
@@ -169,7 +169,7 @@ shelter_days
 ```
 
 
-####Dog name VS. Outcome
+###Dog name VS. Outcome
 We then analyzed if a dog has a name, how it will affect its outcome. As we can see, there seem to be a higher rate of being returned to owner if the dog has a name. There is also a significant increase for a dog to be transferred if it has no name. The adoption rate, however remains the same. 
 
 ```{r names vs. outcome, echo=FALSE, message=FALSE, warning=FALSE}
@@ -227,7 +227,7 @@ subplot(name, no_name) %>%
 ```
 
 
-####Sex Vs. Outcome
+###Sex Vs. Outcome
 We then noticed that the gender of the dog is divided into four categories: Neutered Male, Spayed Female, Intact Female, and Intact Male. For the dogs being returned to the owner, we noticed there is a larger spike for a specific dog to be a neutered male. All other categories remain the same. 
 
 ```{r Sex vs outcome, echo=FALSE, message=FALSE, warning=FALSE}
@@ -282,7 +282,7 @@ sex
 ```
 
 
-##Dog Breeds
+###Dog Breeds
 
 #### Frequency of breeds in shelter relative to their baseline frequency
 Here we compare the frequency of each pure breed in the shelter relative to its baseline frequency in American homes. Positive values (red colors) indicate over-represented breeds in the shelter. These are, presumably, breeds more likely to be abandoned. Negative values (green) indicate the opposite.
@@ -410,6 +410,10 @@ breed_plot <- plot_ly(adoption_rate, x = ~Breed, y = ~Adoption, type = 'bar', na
   layout(autosize = F, width = 900, height = 450, margin = m)
 breed_plot
 
+adoption_rate$Euthanasia_c <- adoption_rate$Euthanasia + adoption_rate$Adoption
+adoption_rate$Return.to.Owner_c <- adoption_rate$Euthanasia + adoption_rate$Adoption + adoption_rate$Return.to.Owner
+adoption_rate$Transfer_c <- adoption_rate$Euthanasia + adoption_rate$Adoption + adoption_rate$Transfer + adoption_rate$Return.to.Owner
+
 # plot_ly(adoption_rate, x = ~Breed, y = ~Adoption, name = 'Adoption rate', type = 'scatter', mode = 'lines') %>%
 #   add_trace(y = ~Euthanasia, name = 'Euthanasia rate', mode = 'lines') %>%
 #   add_trace(y = ~Return.to.Owner, name = 'Return to Owner rate', mode = 'lines') %>%
@@ -421,10 +425,10 @@ breed_plot
 * Non-sporting & Others only consists of one dog
 
 We noticed that hound dog seem to have the highest rate of adoption. And pure dogs, such as non-sporting, terrier and working, had high rate of return to owners.
-```{r, echo = FALSE}
+```{r Adoption by rank}
 rev(adoption_rate$Breed)
 ```
-
+From the ranking, we can see that hounds type of dogs are more likely to be adopted. It also seems like non-sporting dogs will be less likely. 
 
 ##Transition Path
 We furthered wanted to see the path a dog will take once it enters the shelter. The following three bars represent intake type, intake condition and outcome type, individually.
@@ -510,14 +514,7 @@ plot_ly(data = importance,
 
 ```
 
-
-\
-\
-
-
-| Final Classifier | Testing Error Rate |
-|------|------|
-| GBM with 50 trees | 21% |
-
-\
-\
+##Prediction Result
+ | Final Classifier | Testing Error Rate |
+ |------|------|
+ | GBM with 50 trees | 21% |
