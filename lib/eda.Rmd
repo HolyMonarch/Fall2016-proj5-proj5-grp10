@@ -9,15 +9,21 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(plotly)
 ```
 
 ```{r}
-load("~/Desktop/proj5/shelter_data_new.RData")
+setwd("~/Desktop/Fall2016-proj5-proj5-grp10-master/doc")
+source('../lib/simplify_breeds.R')
+```
+
+```{r message=F, echo=F}
+
+load("~/Desktop/shelter_data_new.RData")
 data<-shelter_data_new
-head(data)
-names(data)
+
+
 
 ### Days in shelter 
 # 
@@ -64,11 +70,12 @@ days_in_shelter[which(days_in_shelter<0)]=
   abs(days_in_shelter[which(days_in_shelter<0)])
 
 # Plot the days in shelter according to the intake type.
-plot_ly(data,x=~`Intake Condition`,y=~days_in_shelter,type = 'box',
+p1<-plot_ly(data,x=~`Intake Condition`,y=~days_in_shelter,type = 'box',
         color = ~`Intake Condition`)
+p1
 ```
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ### Animal numbers in shelter days to days (overall)
 
 animal.num<-function(dataset){
@@ -95,14 +102,14 @@ animal.num<-function(dataset){
 all_type_animal_num<-animal.num(data)
 names(all_type_animal_num)
 
-plot_ly(x=~record_time,y=~animal_in_shelter,data =all_type_animal_num ,type = 'scatter', mode = 'lines')%>%
+p2<-plot_ly(x=~record_time,y=~animal_in_shelter,data =all_type_animal_num ,type = 'scatter', mode = 'lines')%>%
   layout(title = "Animal Numbers in Shelter over time",
          xaxis = list(title = "", tickangle = 45, position=.15, domain=c(0,.9)),
          yaxis = list(title = " ", domain=c(.13,1)))
-  
+p2
 ```
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ### Animal numbers in shelter days to days (Group by cats and dogs)
 names(data)
 # unique(data$`Animal Type`) 
@@ -142,7 +149,7 @@ yaxis <- list(title = "",
              zeroline = FALSE,
              showline = FALSE)
 
-plot_ly(group_animal_num, x=~`Record Time`, y=~Dog,
+p3<-plot_ly(group_animal_num, x=~`Record Time`, y=~Dog,
         type = 'scatter', mode = 'lines',name='dogs',
         line = list(color = 'rgb(249, 154, 137)', width = 2))%>%
   add_trace(y=~Cat,type = 'scatter', mode = 'lines',name='cats',
@@ -156,11 +163,12 @@ plot_ly(group_animal_num, x=~`Record Time`, y=~Dog,
    layout(title = "Numbers of group in shelter over time", 
           xaxis = xaxis,
           yaxis = yaxis) 
-  
+
+p3 
 ## Interesting founding: cat numbers in shelter has a seasonal change.
 ```
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 names(data)
 #Numbers in shelter may lead by the Sex upon Intake
 
@@ -199,7 +207,7 @@ yaxis <- list(title = "",
              zeroline = FALSE,
              showline = FALSE)
 
-plot_ly(sex_type_num, x=~`Record Time`, y=~`Neutered Male`,
+p4<-plot_ly(sex_type_num, x=~`Record Time`, y=~`Neutered Male`,
         type = 'scatter', mode = 'lines',name='Neutered Male',
         line = list(color = 'rgb(249, 154, 137)', width = 2))%>%
   
@@ -221,20 +229,20 @@ plot_ly(sex_type_num, x=~`Record Time`, y=~`Neutered Male`,
    layout(title = "Numbers of group by sex in shelter over time", 
           xaxis = xaxis,
           yaxis = yaxis) 
-
+p4
 # Interesting founding:
 # Intact female or male has a seasonal change 
 
 
 ```
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # Combining with the founding in above, I take a look at the dog and cat grouped by the sex.
 
 # dogs data 
 dog_data<-data[which(data$`Animal Type`=="Dog"),]
 dog_sex_type_num<-sex.type.num(dog_data)
-plot_ly(dog_sex_type_num, x=~`Record Time`, y=~`Neutered Male`,
+p5<-plot_ly(dog_sex_type_num, x=~`Record Time`, y=~`Neutered Male`,
         type = 'scatter', mode = 'lines',name='Neutered Male',
         line = list(color = 'rgb(249, 154, 137)', width = 2))%>%
   
@@ -257,10 +265,14 @@ plot_ly(dog_sex_type_num, x=~`Record Time`, y=~`Neutered Male`,
           xaxis = xaxis,
           yaxis = yaxis) 
 
+p5
+
 # cats data
+
 cat_data<-data[which(data$`Animal Type`=="Cat"),]
 cat_sex_type_num<-sex.type.num(cat_data)
-plot_ly(cat_sex_type_num, x=~`Record Time`, y=~`Neutered Male`,
+
+p6<-plot_ly(cat_sex_type_num, x=~`Record Time`, y=~`Neutered Male`,
         type = 'scatter', mode = 'lines',name='Neutered Male',
         line = list(color = 'rgb(249, 154, 137)', width = 2))%>%
   
@@ -283,17 +295,16 @@ plot_ly(cat_sex_type_num, x=~`Record Time`, y=~`Neutered Male`,
           xaxis = xaxis,
           yaxis = yaxis) 
 
+p6
 #No matter what kind of problems that cats have, summer cats numbers  in shelter in summer are significant higher than other months especially for those who are able to have children
 
 ```
 
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #From this on, we focus on dogs
 #Outcome vs sex 
-unique(dog_data$`Outcome Type`)
-unique(dog_data$`Sex upon Intake`)
-names(dog_data)
+
 
 #Deal with the data
 
@@ -316,13 +327,15 @@ percent.out.sex<-function(dataset){
   return(out_sex)
 }
 
+
 out_sex<-percent.out.sex(dog_data)
+
 
 #Plot
 
 top_labels <- colnames(out_sex)
-attach(out_sex)
-p <- plot_ly(out_sex, x = ~Neutered.Male, y = rownames(out_sex), type = 'bar', orientation = 'h',
+
+p7 <- plot_ly(out_sex, x = ~Neutered.Male, y = rownames(out_sex), type = 'bar', orientation = 'h',
              marker = list(color = 'rgba(38, 24, 74, 0.8)',
                            line = list(color = 'rgb(248, 248, 249)', width = 1)),
              name='Neutered<br>Male') %>%
@@ -391,11 +404,11 @@ p <- plot_ly(out_sex, x = ~Neutered.Male, y = rownames(out_sex), type = 'bar', o
                               color = 'rgb(248, 248, 255)'),
                   showarrow = FALSE) 
 
-p
-
+p7
 
 ```
-```{r}
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # Dogs names vs outcome
 # deal with the data
 
@@ -458,4 +471,91 @@ subplot(p_1, p_2) %>%
          margin = list(l = 100, r = 20, t = 70, b = 70),
          paper_bgcolor = 'rgb(248, 248, 255)',
          plot_bgcolor = 'rgb(248, 248, 255)') 
+
+
 ```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Outcome vs days in shelter.
+
+
+dog_days_in_shelter<-as.Date(dog_data$`Outcome Date`,"%y-%m-%d")-as.Date(dog_data$`Intake Date`,"%y-%m-%d")
+
+dog_days_in_shelter[which(dog_days_in_shelter<0)]=
+  abs(dog_days_in_shelter[which(dog_days_in_shelter<0)])
+
+out_days<-data.frame(dog_days_in_shelter,dog_data$`Outcome Type`)[which(
+  dog_data$`Outcome Type`=="Return to Owner"|
+    dog_data$`Outcome Type`=="Transfer"|
+    dog_data$`Outcome Type`=="Adoption"|
+    dog_data$`Outcome Type`=="Euthanasia"
+  ),]
+
+out_days[,2]<-as.factor(as.character(out_days[,2]))
+
+colnames(out_days)<-c("Days","Outcome.Type")
+out_days<-data.frame(as.numeric(out_days[,1]),out_days[,2])
+
+p8<-plot_ly(out_days, y = ~Days, x = ~Outcome.Type,
+            color = ~Outcome.Type, 
+            type = 'box')%>%
+  layout(title='Days in shelter vs Outcome type')
+
+```
+
+```{r}
+#Sankey network
+
+#Create the data
+library(networkD3)
+sankey.data<-function(dataset){
+  
+  sdata<-dataset[which(
+  dataset$`Outcome Type`=="Return to Owner"|
+    dataset$`Outcome Type`=="Transfer"|
+    dataset$`Outcome Type`=="Adoption"|
+    dataset$`Outcome Type`=="Euthanasia"),]
+  
+  
+  dog_nodes<-c(unique(dataset$`Intake Type`),unique(dataset$`Intake Condition`),
+             "Return to Owner","Transfer","Adoption","Euthanasia" )
+  dog_link<-matrix(nrow = 64, ncol = 3 )
+  dog_link[,1]<-c(rep(0,8),rep(1,8),rep(2,8),rep(3,8),
+                rep(4,4),rep(5,4),rep(6,4),rep(7,4),
+                rep(8,4),rep(9,4),rep(10,4),rep(11,4))
+  dog_link[,2]<-c(rep(4:11,4),rep(12:15,8))
+  
+  
+  for (i in 1:64){
+    if(i<=32){
+      dog_link[i,3]<-length(which(sdata$`Intake Type`==dog_nodes[dog_link[i,1]+1] & 
+               sdata$`Intake Condition`== dog_nodes[dog_link[i,2]+1]))
+      }else{
+        dog_link[i,3]<-length(which(sdata$`Intake Condition`==dog_nodes[dog_link[i,1]+1] &
+                                      sdata$`Outcome Type`== dog_nodes[dog_link[i,2]+1]))
+      }
+  }
+  
+  
+  
+  colnames(dog_link)<-c("source","target","value")
+  
+  haha<-list()
+  haha$nodes<-as.data.frame(dog_nodes)
+  haha$links<-as.data.frame(dog_link)
+  
+  return(haha)
+  
+}
+
+
+kk<-sankey.data(dog_data)
+p10<-sankeyNetwork(Links = kk$links, Nodes = kk$nodes, Source = "source",
+              Target = "target", Value = "value", NodeID = "dog_nodes",
+              units = "", fontSize = 12, nodeWidth = 40,nodePadding = 8,
+              margin = NULL, height = 400, width = 800,
+              colourScale = JS("d3.scale.category20()"))
+p10
+
+```
+
