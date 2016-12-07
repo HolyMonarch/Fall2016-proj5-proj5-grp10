@@ -7,6 +7,8 @@ output: html_document
 ##Introduction
 Every year 7.6 million companion animals enter shelters every year. With 13,600 shelters nationwide, it is could be considered a large buisness empire. So what happens to all the dogs that enter the shelter? We decided to investigate what factors could potentially determine the likelyhood of a dog's outcome.
 
+![](http://www.justpuppies.net/images/morkie_index.jpg)
+
 ##Dataset preparation
 Our data is taken from Kaggles' Shelter competition. This data composes information from one shelter in Austin, Texas between the spam of 2013 to 2015. It includes over 30000 domistic animals. In this study, we focused particularily on dogs. 
 
