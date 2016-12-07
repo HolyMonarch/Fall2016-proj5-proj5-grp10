@@ -28,7 +28,7 @@ D$Breed = tolower(D$Breed)
 ##DataSet vs.Outcome 
 We started by analyzing individual topic within the dataset vesus its outcome. To start, we looked at the seasonality of the animals in the shelter. 
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 data<-shelter_data_new
 
@@ -92,8 +92,6 @@ group_animal_num<-animal.type.num(data)
 
 # plot
 
-
-
 p3<-plot_ly(group_animal_num, x=~`Record Time`, y=~Dog,
         type = 'scatter', mode = 'lines',name='dogs',
         line = list(color = 'rgb(126, 172, 247)', width = 2))%>%
@@ -115,9 +113,8 @@ p3<-plot_ly(group_animal_num, x=~`Record Time`, y=~Dog,
 
 From the graph, we noticed that there seems to be some seasonality between the animals. However, when we furthered divided the animals we noticed there is a large seasonlity component for cats. This is not present for dogs. 
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # Outcome vs days in shelter.
-
 
 dog_data<-data[which(data$`Animal Type`=="Dog"),]
 
@@ -159,7 +156,7 @@ p8
 /
 We then analyzed if a dog has a name, how it will affect its outcome. 
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # Dogs names vs outcome
 # deal with the data
 
@@ -218,7 +215,7 @@ subplot(p_1, p_2) %>%
 This data came as expected. [CONTINUE WRITING HERE]
 /
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #From this on, we focus on dogs
 #Outcome vs sex 
 
@@ -363,8 +360,67 @@ plot_ly(data = plot_freqs,
 #JIWEN'S BREED DIAGRAM
 ```
 
+```{r breed.vs.outcome, echo=FALSE, message=FALSE, warning=FALSE}
+outcome = c("Return to Owner","Transfer","Adoption","Euthanasia")
 
-```{r}
+adoption_rate = data.frame(Breed = c(unique(D$Breed_New)), Adoption = 0, Euthanasia = 0, `Return to Owner` = 0, Transfer = 0)
+for (i in 1:dim(adoption_rate)[1]){
+  x = adoption_rate[i,]
+  table = D %>% filter(`Outcome Type` %in% outcome) %>%
+    filter(`Breed_New` == x$Breed) %>% group_by(`Outcome Type`) %>% summarise(count = n())
+  freq = table$count/sum(table$count)
+  if ("Adoption" %in% table$`Outcome Type`){
+    adoption_rate$Adoption[i] = freq[which(table$`Outcome Type` == "Adoption")]
+  }
+  if ("Euthanasia" %in% table$`Outcome Type`){
+    adoption_rate$Euthanasia[i] = freq[which(table$`Outcome Type` == "Euthanasia")]
+  }
+  if ("Return to Owner" %in% table$`Outcome Type`){
+    adoption_rate$Return.to.Owner[i] = freq[which(table$`Outcome Type` == "Return to Owner")]
+  }
+  if ("Transfer" %in% table$`Outcome Type`){
+    adoption_rate$Transfer[i] = freq[which(table$`Outcome Type` == "Transfer")]
+  }
+}
+adoption_rate = adoption_rate[order(adoption_rate$Adoption),]
+
+adoption_rate$Breed = factor(adoption_rate$Breed, levels = adoption_rate$Breed)
+
+f1 <- list(
+  family = "Arial, sans-serif",
+  size = 16,
+  color = "lightgrey"
+)
+f2 <- list(
+  family = "Old Standard TT, serif",
+  size = 10,
+  color = "black"
+)
+a <- list(
+  titlefont = f1,
+  showticklabels = TRUE,
+  tickangle = 45,
+  tickfont = f2,
+  exponentformat = "E"
+)
+m <- list(
+  l = 50,
+  r = 50,
+  b = 100,
+  t = 100,
+  pad = 4
+)
+plot_ly(adoption_rate, x = ~Breed, y = ~Adoption, name = 'Adoption rate', type = 'scatter', mode = 'lines') %>%
+  add_trace(y = ~Euthanasia, name = 'Euthanasia rate', mode = 'lines') %>%
+  add_trace(y = ~Return.to.Owner, name = 'Return to Owner rate', mode = 'lines') %>%
+  add_trace(y = ~Transfer, name = 'Transfer rate', mode = 'lines') %>%
+  layout(title = 'Dog Breeds versus Outcome Type',
+         yaxis = list(title = ''), xaxis = a) %>% 
+         layout(autosize = F, width = 1000, height = 500, margin = m)
+```
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #Sankey network
 
 #Create the data
