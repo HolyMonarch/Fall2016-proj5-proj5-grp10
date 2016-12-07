@@ -1,0 +1,297 @@
+,Breed,Freq,Group
+1,Abyssinian,4,Others
+2,Affenpinscher,16,Toy
+3,Afghan Hound,2,Hound
+4,Airedale Terrier,16,Terrier
+5,Akita,59,Working
+6,Alaskan Husky,53,Working
+7,Alaskan Malamute,40,Working
+8,American,26,Others
+9,American Bulldog,357,Non-sporting
+10,American Eskimo,33,Non-sporting
+11,American Foxhound,16,Hound
+12,American Pit Bull Terrier,200,Terrier
+13,American Sable,4,Others
+14,American Staffordshire Terrier,313,Terrier
+15,Anatol Shepherd,302,Working
+16,Angora,24,Other-animal
+17,Angora-French,2,Other-animal
+18,Armadillo,8,Others
+19,Australian Cattle Dog,1342,Herding
+20,Australian Kelpie,343,Herding
+21,Australian Shepherd,664,Herding
+22,Australian Terrier,10,Terrier
+23,Balinese,16,Others
+24,Bantam,12,Others
+25,Basenji,43,Hound
+26,Basset Hound,206,Hound
+27,Bat,2008,Other-animal
+28,Beagle,594,Hound
+29,Bearded Collie,10,Herding
+30,Beauceron,29,Herding
+31,Bedlington Terr,6,Terrier
+32,Belgian Malinois,69,Herding
+33,Belgian Sheepdog,6,Herding
+34,Belgian Tervuren,5,Herding
+35,Bengal,14,Others
+36,Bernese Mountain Dog,19,Working
+37,Bichon Frise,46,Non-sporting
+38,Black,45,Others
+39,Black Mouth Cur,235,Herding
+40,Bloodhound,29,Hound
+41,Blue Lacy,160,Herding
+42,Bluebird,2,Others
+43,Bluetick Hound,23,Hound
+44,Boerboel,15,Working
+45,Bombay,10,Others
+46,Border Collie,916,Herding
+47,Border Terrier,159,Terrier
+48,Borzoi,1,Hound
+49,Boston Terrier,185,Non-sporting
+50,Boxer,884,Working
+51,Boykin Span,7,Others
+52,British,11,Others
+53,Brittany,40,Sporting
+54,Bruss Griffon,70,Toy
+55,Bull Terrier,103,Terrier
+56,Bull Terrier Miniature,12,Terrier
+57,Bulldog,32,Non-sporting
+58,Bullmastiff,25,Working
+59,Bunting,2,Others
+60,Burmese,2,Others
+61,Cairn Terrier,376,Terrier
+62,Californian,36,Others
+63,Canaan Dog,11,Herding
+64,Cane Corso,24,Working
+65,Cardigan Welsh Corgi,250,Herding
+66,Carolina Dog,99,Others
+67,Catahoula,577,Herding
+68,Catbird,2,Others
+69,Cavalier Span,34,Toy
+70,Chartreux,2,Others
+71,Chesa Bay Retr,33,Sporting
+72,Chicken,46,Other-animal
+73,Chihuahua,5778,Toy
+74,Chinese Crested,10,Toy
+75,Chinese Sharpei,177,Non-sporting
+76,Chow Chow,263,Non-sporting
+77,Cinnamon,2,Other-animal
+78,Cirneco,1,Others
+79,Cockatiel,6,Other-animal
+80,Cocker Spaniel,207,Sporting
+81,Cold Water,10,Others
+82,Collie Rough,44,Herding
+83,Collie Smooth,111,Herding
+84,Conure,6,Others
+85,Cornish Rex,2,Others
+86,Coton De Tulear,2,Non-sporting
+87,Cottontail,4,Others
+88,Coyote,6,Others
+89,Cymric,8,Others
+90,Dachshund,1538,Hound
+91,Dachshund Stan,2,Hound
+92,Dalmatian,49,Non-sporting
+93,Dandie Dinmont,2,Others
+94,Devon Rex,8,Others
+95,Doberman Pinsch,188,Working
+96,Dogo Argentino,49,Others
+97,Dogue De Bordeaux,22,Working
+98,Domestic,23036,Domestic
+99,Domestic Medium,2171,Domestic
+100,Donkey,4,Others
+101,Dove,10,Other-animal
+102,Duck,28,Other-animal
+103,Dutch,5,Others
+104,Dutch Shepherd,30,Working
+105,Eng Toy Spaniel,2,Sporting
+106,English Bulldog,112,Non-sporting
+107,English Cocker Spaniel,9,Sporting
+108,English Coonhound,20,Hound
+109,English Foxhound,20,Hound
+110,English Pointer,31,Sporting
+111,English Setter,9,Sporting
+112,English Shepherd,8,Others
+113,English Spot,4,Others
+114,English Springer Spaniel,27,Sporting
+115,Entlebucher,2,Others
+116,Exotic,4,Others
+117,Feist,12,Others
+118,Ferret,30,Other-animal
+119,Field Spaniel,6,Sporting
+120,Finch,4,Others
+121,Finnish Spitz,27,Hound
+122,Flat Coat Retriever,128,Sporting
+123,Fox,68,Other-animal
+124,French Bulldog,39,Non-sporting
+125,Frog,2,Other-animal
+126,Gerbil,4,Others
+127,German Pinscher,8,Working
+128,German Pointer,77,Sporting
+129,German Shepherd,2192,Herding
+130,Glen Of Imaal,7,Others
+131,Goat,2,Other-animal
+132,Golden Retriever,234,Sporting
+133,Gordon Setter,2,Sporting
+134,Grackle,4,Others
+135,Great Dane,115,Working
+136,Great Pyrenees,401,Working
+137,Greater Swiss Mountain Dog,10,Working
+138,Greyhound,60,Hound
+139,Guinea,2,Other-animal
+140,Guinea Pig,110,Other-animal
+141,Hamster,40,Other-animal
+142,Harrier,67,Hound
+143,Havanese,38,Toy
+144,Himalayan,48,Other-animal
+145,Horse,2,Other-animal
+146,Hotot,2,Others
+147,Ibizan Hound,9,Hound
+148,Irish Setter,7,Sporting
+149,Irish Terrier,20,Terrier
+150,Irish Wolfhound,7,Hound
+151,Italian Greyhound,51,Hound
+152,Jack Russell Terrier,591,Terrier
+153,Japanese Bobtail,15,Other-animal
+154,Japanese Chin,10,Toy
+155,Javanese,2,Others
+156,Jersey Wooly,4,Others
+157,Jindo,5,Others
+158,Keeshond,15,Non-sporting
+159,Kuvasz,7,Working
+160,Labrador Retriever,4722,Sporting
+161,Landseer,8,Others
+162,Lark,2,Others
+163,Leonberger,20,Working
+164,Lhasa Apso,158,Non-sporting
+165,Lionhead,26,Others
+166,Lizard,6,Other-animal
+167,Lop-English,12,Others
+168,Lop-Holland,2,Others
+169,Lop-Mini,5,Others
+170,Lovebird,2,Others
+171,Lowchen,1,Toy
+172,Maine Coon,130,Other-animal
+173,Maltese,262,Toy
+174,Manchester Terrier,148,Terrier
+175,Manx,118,Other-animal
+176,Mastiff,95,Working
+177,Mexicanless,5,Others
+178,Miniature Pinscher,238,Toy
+179,Miniature Poodle,878,Toy
+180,Miniature Schnauzer,516,Terrier
+181,Mockingbird,2,Others
+182,Mouse,2,Others
+183,Munchkin,2,Others
+184,Neapolitan Mastiff,3,Working
+185,New Zealand Wht,10,Others
+186,Newfoundland,20,Working
+187,Norfolk Terrier,79,Terrier
+188,Norwegian Forest Cat,4,Other-animal
+189,Norwich Terrier,49,Terrier
+190,Nova Scotia Duck Tolling Retriever,14,Sporting
+191,Nuthatch,2,Others
+192,Old English Bulldog,10,Non-sporting
+193,Old English Sheepdog,4,Herding
+194,Opossum,234,Other-animal
+195,Oriental Sh,2,Other-animal
+196,Otterhound,9,Hound
+197,Owl,4,Other-animal
+198,Papillon,40,Toy
+199,Parakeet,20,Other-animal
+200,Parrot,4,Other-animal
+201,Parson Russell Terrier,75,Terrier
+202,Patterdale Terr,13,Terrier
+203,Pbgv,40,Hound
+204,Pekingese,74,Toy
+205,Pembroke Welsh Corgi,91,Herding
+206,Persian,25,Other-animal
+207,Pharaoh Hound,28,Hound
+208,Picardy Sheepdog,6,Others
+209,Pig,16,Other-animal
+210,Pigeon,8,Other-animal
+211,Pit Bull,5788,Terrier
+212,Pixiebob,6,Others
+213,Plott Hound,279,Hound
+214,Podengo Pequeno,10,Hound
+215,Pointer,346,Sporting
+216,Pointing Griffon,6,Others
+217,Pomeranian,158,Toy
+218,Port Water Dog,4,Others
+219,Potbelly Pig,2,Other-animal
+220,Presa Canario,12,Others
+221,Pug,256,Toy
+222,Pygmy,2,Others
+223,Quaker,4,Others
+224,Quarter Horse,2,Other-animal
+225,Queensland Heeler,148,Herding
+226,Rabbit Lh,4,Other-animal
+227,Rabbit Sh,252,Other-animal
+228,Raccoon,826,Other-animal
+229,Ragdoll,39,Other-animal
+230,Rat,24,Other-animal
+231,Rat Terrier,590,Terrier
+232,Redbone Hound,83,Hound
+233,Rex,16,Others
+234,Rhod Ridgeback,94,Hound
+235,Rhode Island,4,Hound
+236,Ringtail,2,Others
+237,Rottweiler,447,Working
+238,Russian Blue,89,Other-animal
+239,Saluki,9,Hound
+240,Samoyed,12,Working
+241,Schipperke,27,Others
+242,Schnauzer Giant,10,Working
+243,Scottish Terrier,12,Terrier
+244,Sealyham Terr,2,Terrier
+245,Shetland Sheepdog,73,Herding
+246,Shiba Inu,47,Non-sporting
+247,Shih Tzu,453,Toy
+248,Siamese,1046,Other-animal
+249,Siberian Husky,547,Working
+250,Silkie,2,Others
+251,Silky Terrier,20,Toy
+252,Silver,2,Others
+253,Skunk,138,Other-animal
+254,Skye Terrier,11,Terrier
+255,Smooth Fox Terrier,34,Terrier
+256,Snake,12,Other-animal
+257,Snowshoe,206,Other-animal
+258,Soft Coated Wheaten Terrier,65,Terrier
+259,Spanish Mastiff,2,Working
+260,Spanish Water Dog,1,Sporting
+261,Sparrow,6,Other-animal
+262,Sphynx,4,Others
+263,Spinone Italiano,4,Sporting
+264,Squirrel,108,Other-animal
+265,St. Bernard Rough Coat,21,Working
+266,St. Bernard Smooth Coat,23,Working
+267,Staffordshire,282,Terrier
+268,Standard Poodle,48,Others
+269,Standard Schnauzer,43,Working
+270,Sugar Glider,2,Others
+271,Swedish Vallhund,20,Herding
+272,Swiss Hound,1,Hound
+273,Tan Hound,36,Hound
+274,Tarantula,12,Other-animal
+275,Tibetan Spaniel,22,Sporting
+276,Tibetan Terrier,18,Non-sporting
+277,Tonkinese,12,Others
+278,Tortoise,8,Others
+279,Toy Fox Terrier,25,Terrier
+280,Toy Poodle,128,Toy
+281,Treeing Cur,16,Others
+282,Treeing Walker Coonhound,34,Hound
+283,Turkey,4,Other-animal
+284,Turkish Angora,2,Other-animal
+285,Turkish Van,4,Others
+286,Turtle,22,Other-animal
+287,Unknown,2,Others
+288,Vizsla,65,Sporting
+289,Weimaraner,75,Sporting
+290,Welsh Springer Spaniel,2,Sporting
+291,Welsh Terrier,17,Terrier
+292,West Highland,51,Terrier
+293,Whippet,85,Hound
+294,Wire Fox Terrier,49,Terrier
+295,Yorkshire,1,Others
+296,Yorkshire Terrier,566,Toy
