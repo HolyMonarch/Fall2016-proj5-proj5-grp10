@@ -1,0 +1,387 @@
+Breed,Group
+Domestic,Domestic
+Bracco Italiano,Sporting
+Braque D'Auvergne,Sporting
+Brittany,Sporting
+English Setter,Sporting
+German Longhaired Pointer,Sporting
+German Shorthaired Pointer,Sporting
+German Wirehaired Pointer,Sporting
+Gordon Setter,Sporting
+Hungarian Vizsla,Sporting
+Hungarian Wire Haired Vizsla,Sporting
+Irish Red & White Setter,Sporting
+Irish Setter,Sporting
+Italian Spinone,Sporting
+Korthals Griffon,Sporting
+Lagotto Romagnolo,Sporting
+Large Munsterlander,Sporting
+Pointer,Sporting
+Portuguese Pointer,Sporting
+Retriever,Sporting
+Slovakian Rough Haired Pointer,Sporting
+Small Munsterlander,Sporting
+Spaniel,Sporting
+Spanish Water Dog,Sporting
+Weimaraner,Sporting
+Australian Cattle Dog,Herding
+Australian Shepherd,Herding
+Bearded Collie,Herding
+Beauceron,Herding
+Belgian Malinois,Herding
+Belgian Sheepdog,Herding
+Belgian Tervuren,Herding
+Bergamasco Sheepdog,Herding
+Berger Picard,Herding
+Border Collie,Herding
+Bouvier Des Flandres,Herding
+Briard,Herding
+Canaan Dog,Herding
+Cardigan Welsh Corgi,Herding
+Collie,Herding
+Entlebucher Mountain Dog,Herding
+Finnish Lapphund,Herding
+German Shepherd Dog,Herding
+Icelandic Sheepdog,Herding
+Miniature American Shepherd,Herding
+Norwegian Buhund,Herding
+Old English Sheepdog,Herding
+Pembroke Welsh Corgi,Herding
+Polish Lowland Sheepdog,Herding
+Puli,Herding
+Pumi,Herding
+Pyrenean Shepherd,Herding
+Shetland Sheepdog,Herding
+Swedish Vallhund,Herding
+Australian Kelpie,Herding
+Catahoula,Herding
+German Shepherd,Herding
+Black Mouth Cur,Herding
+Blue Lacy,Herding
+Queensland Heeler,Herding
+Afghan Hound,Hound
+American English Coonhound,Hound
+American Foxhound,Hound
+Azawakh,Hound
+Basenji,Hound
+Basset Bleu De Gascogne,Hound
+Basset Fauve De Bretagne,Hound
+Basset Griffon Vendeen,Hound
+Basset Hound,Hound
+Bavarian Mountain Hound,Hound
+Beagle,Hound
+Black And Tan Coonhound,Hound
+Bloodhound,Hound
+Bluetick Coonhound,Hound
+Borzoi,Hound
+Cirneco Dell'Etna,Hound
+Dachshund,Hound
+Deerhound,Hound
+English Foxhound,Hound
+Finnish Spitz,Hound
+Foxhound,Hound
+Grand Bleu De Gascogne,Hound
+Greyhound,Hound
+Griffon Fauve De Bretagne,Hound
+Hamiltonstovare,Hound
+Harrier,Hound
+Ibizan Hound,Hound
+Irish Wolfhound,Hound
+Norwegian Elkhound,Hound
+Otterhound,Hound
+Petit Basset Griffon Vend<U+00E9>en,Hound
+Pharaoh Hound,Hound
+Plott,Hound
+Portuguese Podengo,Hound
+Redbone Coonhound,Hound
+Rhodesian Ridgeback,Hound
+Saluki,Hound
+Scottish Deerhound,Hound
+Segugio Italiano,Hound
+Sloughi,Hound
+Treeing Walker Coonhound,Hound
+Whippet,Hound
+Redbone Hound,Hound
+Bluetick Hound,Hound
+Rhod Ridgeback,Hound
+Rhode Island,Hound
+Tan Hound,Hound
+American Eskimo Dog,Non-sporting
+Bichon Frise,Non-sporting
+Boston Terrier,Non-sporting
+Bulldog,Non-sporting
+Chinese Shar-Pei,Non-sporting
+Chow Chow,Non-sporting
+Coton De Tulear,Non-sporting
+Dalmatian,Non-sporting
+French Bulldog,Non-sporting
+Keeshond,Non-sporting
+Lhasa Apso,Non-sporting
+Norwegian Lundehund,Non-sporting
+Poodle ,Non-sporting
+Shiba Inu,Non-sporting
+Tibetan Spaniel,Non-sporting
+Tibetan Terrier,Non-sporting
+Xoloitzcuintli,Non-sporting
+Chinese Sharpei,Non-sporting
+American Eskimo,Non-sporting
+Raccoon,Other-animal
+Rabbit Sh,Other-animal
+Rabbit Lh,Other-animal
+Norwegian Forest Cat,Other-animal
+Opossum,Other-animal
+Owl,Other-animal
+Snowshoe,Other-animal
+Sparrow,Other-animal
+Angora,Other-animal
+Bat,Other-animal
+Chicken,Other-animal
+Duck,Other-animal
+Dove,Other-animal
+Fox,Other-animal
+Guinea,Other-animal
+Guinea Pig,Other-animal
+Japanese Bobtail,Other-animal
+Hamster,Other-animal
+Himalayan,Other-animal
+Manx,Other-animal
+Maine Coon,Other-animal
+Oriental Sh,Other-animal
+Pig,Other-animal
+Ragdoll,Other-animal
+Rat,Other-animal
+Russian Blue,Other-animal
+Siamese,Other-animal
+Skunk,Other-animal
+Squirrel,Other-animal
+American Water Spaniel,Sporting
+Boykin Spaniel,Sporting
+Chesapeake Bay Retriever,Sporting
+Clumber Spaniel,Sporting
+Curly-Coated Retriever,Sporting
+English Cocker Spaniel,Sporting
+English Springer Spaniel,Sporting
+Field Spaniel,Sporting
+Flat-Coated Retriever,Sporting
+German Pointer,Sporting
+Golden Retriever,Sporting
+Irish Water Spaniel,Sporting
+Labrador Retriever,Sporting
+Nova Scotia Duck Tolling Retriever,Sporting
+Red And White Setter,Sporting
+Spinone Italiano,Sporting
+Sussex Spaniel,Sporting
+Vizsla,Sporting
+Welsh Springer Spaniel,Sporting
+Wirehaired Pointing Griffon,Sporting
+Wirehaired Vizsla,Sporting
+Cocker Spaniel,Sporting
+Airedale Terrier,Terrier
+American Hairless Terrier,Terrier
+American Staffordshire Terrier,Terrier
+Australian Terrier,Terrier
+Bedlington Terrier,Terrier
+Border Terrier,Terrier
+Bull Terrier,Terrier
+Cairn Terrier,Terrier
+Cesky Terrier,Terrier
+Dandie Dinmont Terrier,Terrier
+Fox Terrier,Terrier
+Glen Of Imaal Terrier,Terrier
+Irish Terrier,Terrier
+Jack Russell Terrier,Terrier
+Kerry Blue Terrier,Terrier
+Lakeland Terrier,Terrier
+Manchester Terrier,Terrier
+Miniature Bull Terrier,Terrier
+Miniature Schnauzer,Terrier
+Norfolk Terrier,Terrier
+Norwich Terrier,Terrier
+Parson Russell Terrier,Terrier
+Rat Terrier,Terrier
+Russell Terrier,Terrier
+Scottish Terrier,Terrier
+Sealyham Terrier,Terrier
+Skye Terrier,Terrier
+Smooth Fox Terrier,Terrier
+Soft Coated Wheaten Terrier,Terrier
+Staffordshire Bull Terrier,Terrier
+Welsh Terrier,Terrier
+West Highland White Terrier,Terrier
+Wire Fox Terrier,Terrier
+Pit Bull,Terrier
+Staffordshire,Terrier
+Sealyham Terr,Terrier
+West Highland,Terrier
+Affenpinscher,Toy
+Australian Silky Terrier,Toy
+Bolognese,Toy
+Brussels Griffon,Toy
+Cavalier King Charles Spaniel,Toy
+Chihuahua,Toy
+Chinese Crested,Toy
+English Toy Spaniel,Toy
+English Toy Terrier,Toy
+Griffon Bruxellois,Toy
+Havanese,Toy
+Italian Greyhound,Toy
+Japanese Chin,Toy
+King Charles Spaniel,Toy
+Lowchen,Toy
+Maltese,Toy
+Miniature Pincher,Toy
+Papillon,Toy
+Pekingese,Toy
+Pomeranian,Toy
+Pug,Toy
+Shih Tzu,Toy
+Silky Terrier,Toy
+Toy Fox Terrier,Toy
+Yorkshire Terrier,Toy
+Miniature Pinscher,Toy
+Miniature Poodle,Toy
+Bruss Griffon,Toy
+Cavalier Span,Toy
+Toy Poodle,Toy
+Akita,Working
+Alaskan Malamute,Working
+Anatolian Shepherd Dog,Working
+Bernese Mountain Dog,Working
+Black Russian Terrier,Working
+Boerboel,Working
+Boxer,Working
+Bullmastiff,Working
+Canadian Eskimo Dog,Working
+Cane Corso,Working
+Chinook,Working
+Doberman Pinscher,Working
+Dobermann,Working
+Dogue De Bordeaux,Working
+German Pinscher,Working
+Giant Schnauzer,Working
+Great Dane,Working
+Great Pyrenees,Working
+Greater Swiss Mountain Dog,Working
+Greenland Dog,Working
+Hovawart,Working
+Komondor,Working
+Kuvasz,Working
+Leonberger,Working
+Mastiff,Working
+Neapolitan Mastiff,Working
+Newfoundland,Working
+Portuguese Water Dog,Working
+Pyrenean Mastiff,Working
+Rottweiler,Working
+Russian Black Terrier,Working
+Saint Bernard,Working
+Samoyed,Working
+Siberian Husky,Working
+St. Bernard,Working
+Standard Schnauzer,Working
+Tibetan Mastiff,Working
+Anatol Shepherd,Working
+Doberman Pinsch,Working
+Alaskan Husky,Working
+Schnauzer Giant,Working
+Bedlington Terr,Terrier
+Chesa Bay Retr,Sporting
+Cinnamon,Other-animal
+Cockatiel,Other-animal
+Dutch Shepherd,Working
+English Coonhound,Hound
+Ferret,Other-animal
+Frog,Other-animal
+Goat,Other-animal
+Horse,Other-animal
+Lizard,Other-animal
+Parakeet,Other-animal
+Persian,Other-animal
+Patterdale Terr,Terrier
+Parrot,Other-animal
+Podengo Pequeno,Hound
+Pbgv,Hound
+Quarter Horse,Other-animal
+Quarter,Other-animal
+Snake,Other-animal
+Swiss Hound,Hound
+Tarantula,Other-animal
+Turtle,Other-animal
+Turkey,Other-animal
+Abyssinian,Others
+American,Others
+American Sable,Others
+Armadillo,Others
+Balinese,Others
+Bantam,Others
+Bengal,Others
+Black,Others
+Bluebird,Others
+Bombay,Others
+Boykin Span,Others
+British,Others
+Bunting,Others
+Burmese,Others
+Californian,Others
+Carolina Dog,Others
+Catbird,Others
+Chartreux,Others
+Cirneco,Others
+Cold Water,Others
+Conure,Others
+Cornish Rex,Others
+Cottontail,Others
+Coyote,Others
+Cymric,Others
+Dandie Dinmont,Others
+Devon Rex,Others
+Dogo Argentino,Others
+Donkey,Others
+Dutch,Others
+English Shepherd,Others
+English Spot,Others
+Entlebucher,Others
+Exotic,Others
+Feist,Others
+Finch,Others
+Gerbil,Others
+Glen Of Imaal,Others
+Grackle,Others
+Hotot,Others
+Javanese,Others
+Jersey Wooly,Others
+Jindo,Others
+Landseer,Others
+Lark,Others
+Lionhead,Others
+Lop-English,Others
+Lop-Holland,Others
+Lop-Mini,Others
+Lovebird,Others
+Mexicanless,Others
+Mockingbird,Others
+Mouse,Others
+Munchkin,Others
+New Zealand Wht,Others
+Nuthatch,Others
+Picardy Sheepdog,Others
+Pixiebob,Others
+Pointing Griffon,Others
+Port Water Dog,Others
+Presa Canario,Others
+Pygmy,Others
+Quaker,Others
+Rex,Others
+Ringtail,Others
+Schipperke,Others
+Silkie,Others
+Silver,Others
+Sphynx,Others
+Standard Poodle,Others
+Sugar Glider,Others
+Tonkinese,Others
+Tortoise,Others
+Treeing Cur,Others
+Turkish Van,Others
+Unknown,Others
+Yorkshire,Others
