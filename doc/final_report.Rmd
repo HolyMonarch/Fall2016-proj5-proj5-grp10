@@ -12,7 +12,11 @@ Every year 7.6 million companion animals enter shelters every year. With 13,600 
 ##Dataset preparation
 Our data is taken from Kaggles' Shelter competition. This data composes information from one shelter in Austin, Texas between the spam of 2013 to 2015. It includes over 30000 domistic animals. In this study, we focused particularily on dogs. 
 
-The data set originally contained 20 attributes. In particular, Breed and Color contained over 3000 unique factors. After refactoring these columns, we have 36 types of dogs along with 30 different colors. Please reference "../lib/Data Preparation Code.R".
+The data set originally contained 20 attributes. In particular, Breed and Color contained over 3000 unique factors. Because majority of the dogs are mixed. We wanted to provide the ability to capture a difference between purebreeds and different categories of dog. For color, wedecided to focus on the first color listed and indicate if it is a mix color breed. This is because an animal has a dominate color. After refactoring these columns, we have 36 types of dogs along with 30 different colors.
+
+For age, we changed all animals to be calculated by days because there were multiple animals that were less than a month old. 
+
+Please reference "../lib/Data Preparation Code.R".
 
 ```{r setup, include=FALSE}
 
@@ -549,6 +553,14 @@ plot_ly(data = importance,
 ```
 
 ##Prediction Result
+
+
+##Conclusion
  | Final Classifier | Testing Error Rate |
  |------|------|
- | GBM with 50 trees | 21% |
+ | GBM with 50 trees | 21% (chance level ~ 47%)|
+###Limitations and Improvements
+1. Dataset Input: our dataset is isolated to a shelter in Austin, Texas. Because of this we have limited information about other regions of the United States.
+2. Dataset: there is some user error in the intake and outcome times.
+3. Examination: we only analyzed individual components vesus the outcome. A more detailed examination, we should look at the correlation between other components.
+4. Prediction: we used one model to run our test. It would be beneficial if we used multiple test to analyze our conclusions. 
