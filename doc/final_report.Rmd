@@ -1,15 +1,16 @@
 ---
 title: "Shelter Dogs"
+author: "ADS Project 5 Group 10"
 output: html_document
 ---
-
-#Where Am I Going?
 
 ##Introduction
 Every year 7.6 million companion animals enter shelters every year. With 13,600 shelters nationwide, it is could be considered a large buisness empire. So what happens to all the dogs that enter the shelter? We decided to investigate what factors could potentially determine the likelyhood of a dog's outcome.
 
-##Dataset
+##Dataset preparation
 Our data is taken from Kaggles' Shelter competition. This data composes information from one shelter in Austin, Texas between the spam of 2013 to 2015. It includes over 30000 domistic animals. In this study, we focused particularily on dogs. 
+
+The data set originally contained 20 attributes. In particular, Breed and Color contained over 3000 unique factors. After refactoring these columns, we have 36 types of dogs along with 30 different colors. Please reference "../lib/Data Preparation Code.R".
 
 ```{r setup, include=FALSE}
 
@@ -24,27 +25,23 @@ source('../lib/simplify_breeds.R')
 load("../data/shelter_data_new.RData")
 ```
 
-##Dataset Cleaning
-The data set originally contained 20 attributes. In particular, Breed and Color contained over 3000 unique factors. After refactoring these columns, we have 36 types of dogs along with 30 different colors. Please reference "../lib/Data Preparation Code.R". 
-
-Original 
-
+* Original 
 ```{r, echo = FALSE}
 colnames(shelter_data_new)[1:20]
 ```
 
-New
-
+* New
 ```{r, echo = FALSE}
 colnames(shelter_data_new)
 ```
 
 ##Analysis
-We started to look at the frequency of the outcome.
+We started to look at the frequency of the outcome. As shown below, the largest four components are adoption, transfer, return to owner, and euthanasia. Because the other components make up a small component, we set a primary forcus on the others. 
+
 
 ```{r Pie Chart of Outcome, echo=FALSE, message=FALSE, warning=FALSE}
 data<-shelter_data_new
-Outcome <- data.frame(Type = data$'Outcome Type') %>% filter('Outcome Type' != "")
+Outcome <- data.frame(Type = data$'Outcome Type') %>% filter(Type != "")
 Outcome <-Outcome %>% 
   group_by(Type) %>%
   summarise(freq = length(Type))
@@ -56,14 +53,12 @@ o_piechart <- plot_ly(Outcome, labels = ~Type, values = ~freq, type = 'pie',mark
 o_piechart
 ```
 
-As shown above, the largest four components are adoption, transfer, return to owner, and euthanasia. Because the other components make up a small component, we set a primary forcus on the others. 
-
 ##Dataset vs.Outcome 
 
 ####Seasonality
-To start, we looked at the seasonality of the animals in the shelter. 
+To start, we looked at the seasonality of the animals in the shelter. From the graph, we noticed that there seems to be some seasonality between the animals. However, when we furthered divided the animals we noticed there is a large seasonlity component for cats. This is not present for dogs. We can conclude there is very little seasonality for dogs. 
 
-```{r Seasonality, echo = FALSE}
+```{r seasonality graph, echo = FALSE}
 animal.num<-function(dataset){
   record_time<-seq(as.Date("2013-10-01"),as.Date("2015-09-30"),by="day")
   n<-length(record_time)
@@ -102,9 +97,6 @@ animal.type.num<-function(dataset){
   
   return(hehe)
 }
-```
-
-```{r seasonality graph, echo=FALSE}
 
 group_animal_num<-animal.type.num(data)
 group_animal_num$All <- all_type_animal_num$animal_in_shelter
@@ -134,14 +126,15 @@ Seasonality<-plot_ly(group_animal_num, x=~`Record Time`, y=~Dog,
           yaxis = list(title = "",showgrid = FALSE,zeroline = FALSE,showline = FALSE))
 Seasonality
 ```
-From the graph, we noticed that there seems to be some seasonality between the animals. However, when we furthered divided the animals we noticed there is a large seasonlity component for cats. This is not present for dogs. We can conclude there is very little seasonality for dogs. 
+
 
 ####Days in shelter VS. Outcome
-We also anaylized how the number of days in the shelter affected the outcome of the dog. 
 
-```{r shelter days, echo = FALSE}
-# Outcome vs days in shelter.
+We also anaylized how the number of days in the shelter affected the outcome of the dog. From the graph, we can note that majority of the dogs stay for less than 10 days. For dogs who return to owners, they are more quickly returned than dogs who are adopted.
+
+```{r shelter days vs outcome, echo=FALSE, message=FALSE, warning=FALSE}
 dog_data<-data[which(data$`Animal Type`=="Dog"),]
+
 out.days<-function(dataset){
   
   dog_days_in_shelter<-as.Date(dataset$`Outcome Date`,"%y-%m-%d")-
@@ -171,9 +164,11 @@ shelter_days<-plot_ly(out_days, y = ~Days, x = ~Outcome.Type, color = ~Outcome.T
   layout(title='Days in shelter vs Outcome type')
 shelter_days
 ```
-From the graph, we can note that majority of the dogs stay for less than 10 days. For dogs who return to owners, they are more quickly returned than dogs who are adopted. 
-/
-We then analyzed if a dog has a name, how it will affect its outcome. 
+
+
+####Dog Name VS. Outcome
+
+We then analyzed if a dog has a name, how it will affect its outcome. As we can see, there seem to be a higher rate of being returned to owner if the dog has a name. There is also a significant increase for a dog to be transferred if it has no name. The adoption rate, however remains the same. 
 
 ```{r names vs. outcome, echo = FALSE}
 # Dogs names vs outcome
@@ -227,10 +222,10 @@ subplot(name, no_name) %>%
          plot_bgcolor = 'rgb(248, 248, 255)') 
 
 ```
-As we can see, there seem to be a higher rate of being returned to owner if the dog has a name. There is also a significant increase for a dog to be transferred if it has no name. The adoption rate, however remains the same. 
+
 
 ####Sex Vs. Outcome
-We then noticed that the gender of the dog is divided into four categories: Neutered Male, Spayed Female, Intact Female, and Intact Male. 
+We then noticed that the gender of the dog is divided into four categories: Neutered Male, Spayed Female, Intact Female, and Intact Male. For the dogs being returned to the owner, we noticed there is a larger spike for a specific dog to be a neutered male. All other categories remain the same. 
 
 ```{r Sex vs outcome, echo = FALSE}
 #Deal with the data
@@ -283,12 +278,11 @@ sex <- plot_ly(out_sex, x = ~Neutered.Male, y = rownames(out_sex), type = 'bar',
 sex
 
 ```
-For the dogs being returned to the owner, we noticed there is a larger spike for a specific dog to be a neutered male. All other categories remain the same. 
+
 
 ###Breeds
 #### Frequency of breeds in shelter relative to their baseline frequency
 Here we compare the frequency of each pure breed in the shelter relative to its baseline frequency in American homes. Positive values (red colors) indicate over-represented breeds in the shelter. These are, presumably, breeds more likely to be abandoned. Negative values (green) indicate the opposite.
-\
 
 ```{r analysis2, warning=FALSE, message=FALSE, echo=FALSE}
 D = shelter_data_new
@@ -360,7 +354,8 @@ Keeping in mind, this only shows pure breed dogs. We can see that there are sele
 
 ####Breed VS. Outcome
 We then studied if the dog breed function effects the outcome of the dog. In particular, we focuesed on adoption. After recategorizing the dogs based on breed, function, and mix. We categorized the dog into 36 categories. Then we got the outcome ratio. 
-```{r adoption_ratio, echo = FALSE}
+
+```{r breeds group vs outcome, echo = FALSE}
 outcome = c("Return to Owner","Transfer","Adoption","Euthanasia")
 
 adoption_rate = data.frame(Breed = c(unique(D$Breed_New)), Adoption = 0, Euthanasia = 0, `Return to Owner` = 0, Transfer = 0)
