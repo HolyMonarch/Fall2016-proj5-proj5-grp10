@@ -482,7 +482,7 @@ We now look at what characteristics make a dog more likely to be adopted. We ran
 ```{r outcome prediction, warning=FALSE, message=FALSE, echo=FALSE}
 
 # load relevant output of logistic regression:
-load('../output/lrt_log_reg.RData')
+load('../output/lrt_log_reg2.RData')
 
 # plot
 importance = lrt[-1,2]/lrt[-1,1]
