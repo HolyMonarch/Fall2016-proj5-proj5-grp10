@@ -115,10 +115,10 @@ plot_ly(data = plot_freqs,
          xaxis = list(title = "", tickangle = 45, position=.15, domain=c(0,.9)),
          yaxis = list(title = "<- Less than Expected | More than Expected ->                          .", 
                       domain=c(.13,1)))
-
-
 ```
-
+```{r}
+#JIWEN'S BREED DIAGRAM
+```
 
 
 ```{r}
