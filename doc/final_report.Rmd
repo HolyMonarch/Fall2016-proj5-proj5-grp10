@@ -3,8 +3,6 @@ title: "Shelter Dogs"
 output: html_document
 ---
 
-
-
 #Where Am I Going?
 
 ##Introduction
@@ -27,14 +25,16 @@ load("../data/shelter_data_new.RData")
 ```
 
 ##Dataset Cleaning
-The data set originally contained 20 attributes. In particular, Breed and Color contained over 3000 unique factors. After refactoring these columns, we have 36 types of dogs along with 30 different colors. Please reference "../lib/simplify_breeds.R". 
+The data set originally contained 20 attributes. In particular, Breed and Color contained over 3000 unique factors. After refactoring these columns, we have 36 types of dogs along with 30 different colors. Please reference "../lib/Data Preparation Code.R". 
 
 Original 
 
 ```{r, echo = FALSE}
 colnames(shelter_data_new)[1:20]
 ```
+
 New
+
 ```{r, echo = FALSE}
 colnames(shelter_data_new)
 ```
@@ -42,9 +42,9 @@ colnames(shelter_data_new)
 ##Analysis
 We started to look at the frequency of the outcome.
 
-```{r Pie Chart of Outcome}
-data <- shelter_data_new
-Outcome <- data.frame(Type = data$'Outcome Type')
+```{r Pie Chart of Outcome, echo=FALSE, message=FALSE, warning=FALSE}
+data<-shelter_data_new
+Outcome <- data.frame(Type = data$'Outcome Type') %>% filter('Outcome Type' != "")
 Outcome <-Outcome %>% 
   group_by(Type) %>%
   summarise(freq = length(Type))
@@ -55,17 +55,15 @@ o_piechart <- plot_ly(Outcome, labels = ~Type, values = ~freq, type = 'pie',mark
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 o_piechart
 ```
+
 As shown above, the largest four components are adoption, transfer, return to owner, and euthanasia. Because the other components make up a small component, we set a primary forcus on the others. 
 
-
 ##Dataset vs.Outcome 
+
 ####Seasonality
 To start, we looked at the seasonality of the animals in the shelter. 
 
 ```{r Seasonality, echo = FALSE}
-
-data<-shelter_data_new
-
 animal.num<-function(dataset){
   record_time<-seq(as.Date("2013-10-01"),as.Date("2015-09-30"),by="day")
   n<-length(record_time)
