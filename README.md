@@ -12,9 +12,9 @@ Term: Fall 2016
 + Project summary: Our project uses the data from a shelter in Austin, Texas over the span of 2 years. During this time, over 30,000 animals passed through the shelter. After providing a detailed anaylsis of the shelter population, we attmpt to predict whether a dog will be adopted or not and explore the largest contributing factors to this outcome. 
 
 ### [See full report here](http://www.columbia.edu/~as3171/final_report_proj5.html)
-
 <br/>
-### Snapshots:
+## Snapshots:
+<br/>
 
 ![screenshot](https://raw.githubusercontent.com/TZstatsADS/Fall2016-proj5-proj5-grp10/master/figs/screenshot1.PNG)
 ![screenshot](https://raw.githubusercontent.com/TZstatsADS/Fall2016-proj5-proj5-grp10/master/figs/screenshot2.PNG)
