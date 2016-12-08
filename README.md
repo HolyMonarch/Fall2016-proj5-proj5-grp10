@@ -11,11 +11,11 @@ Term: Fall 2016
 	+ Ying Zhu
 + Project summary: Our project uses the data from a shelter in Austin, Texas over the span of 2 years. During this time, over 30,000 animals passed through the shelter. After providing a detailed anaylsis of the shelter population, we attmpt to predict whether a dog will be adopted or not and explore the largest contributing factors to this outcome. 
 
-### [See report (web page)](http://www.columbia.edu/~as3171/final_report_proj5.html)
+### [See full report (web page)](http://www.columbia.edu/~as3171/final_report_proj5.html)
 
-![screenshot](https://raw.githubusercontent.com/TZstatsADS/Fall2016-proj5-proj5-grp10/master/doc/screenshot1.JPG)
-![screenshot](https://github.com/TZstatsADS/Fall2016-proj5-proj5-grp10/blob/master/doc/screenshot2.jpg)
-![screenshot](https://github.com/TZstatsADS/Fall2016-proj5-proj5-grp10/blob/master/doc/screenshot3.jpg)
+![screenshot](https://raw.githubusercontent.com/TZstatsADS/Fall2016-proj5-proj5-grp10/master/fig/screenshot1.PNG)
+![screenshot](https://raw.githubusercontent.com/TZstatsADS/Fall2016-proj5-proj5-grp10/master/fig/screenshot2.PNG)
+![screenshot](https://raw.githubusercontent.com/TZstatsADS/Fall2016-proj5-proj5-grp10/master/fig/screenshot3.PNG)
 
 
 	
