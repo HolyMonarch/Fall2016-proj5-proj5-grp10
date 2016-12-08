@@ -14,6 +14,7 @@ Term: Fall 2016
 ### [See full report here](http://www.columbia.edu/~as3171/final_report_proj5.html)
 
 <br/>
+### Snapshots:
 
 ![screenshot](https://raw.githubusercontent.com/TZstatsADS/Fall2016-proj5-proj5-grp10/master/figs/screenshot1.PNG)
 ![screenshot](https://raw.githubusercontent.com/TZstatsADS/Fall2016-proj5-proj5-grp10/master/figs/screenshot2.PNG)
