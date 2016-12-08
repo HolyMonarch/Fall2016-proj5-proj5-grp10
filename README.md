@@ -10,6 +10,9 @@ Term: Fall 2016
 	+ Jiwen You
 	+ Ying Zhu
 + Project summary: Our project uses the data from a shelter in Austin, Texas over the span of 2 years. During this time, over 30,000 animals passed through the shelter. After providing a detailed anaylsis of the shelter population, we analyze which is the largest contributing factor that will affect a dog probabilty of being adopted. 
+
+#### [See report (web page)](http://www.columbia.edu/~as3171/final_report_proj5.html)
+
 	
 **Contribution statement**: ([default](doc/a_note_on_contributions.md)) All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. 
 
